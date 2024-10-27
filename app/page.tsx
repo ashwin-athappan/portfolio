@@ -1,7 +1,9 @@
+import ThemeSwitch from "@/app/components/ThemeSwitch/ThemeSwitch";
+
 export default function Home() {
     return (
-        <div>
-            Hi
-        </div>
+        <main className="">
+            Hello
+        </main>
     );
 }
