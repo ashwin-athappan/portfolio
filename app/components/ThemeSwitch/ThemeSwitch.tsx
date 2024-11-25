@@ -25,11 +25,11 @@ const ThemeSwitch = () => {
     }, [darkMode]);
 
     return (
-        <div className="relative inline-block">
+        <div className="inline-block">
             <input
                 id="Switch"
                 type="checkbox"
-                onClick={() => setDarkMode(!darkMode)}
+                onChange={() => setDarkMode(!darkMode)}
                 className={styles.switch__input}
                 checked={!darkMode} />
             <label className={styles.switch__label} htmlFor="Switch">

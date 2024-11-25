@@ -9,8 +9,11 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                dark: "var(--color-dark)",
-                light: "var(--color-light)",
+                jetBlack: "#373738",
+                jetBlackDark: "#1E1E1F",
+                jetWhite: "#e6e6e6",
+                contrastBlack: "#282829",
+                contrastWhite: "#e6e5e6",
             },
         },
     },
