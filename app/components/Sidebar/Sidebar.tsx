@@ -3,7 +3,7 @@
 import '@/app/components/common.css';
 import Image from "next/image";
 
-import coding from "@/public/me/coding.png"
+import coding from "@/public/_assets/me/coding.png"
 
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import {useEffect, useState} from "react";
@@ -20,7 +20,7 @@ export default function Sidebar() {
 
     return (
         <div
-            className="flex flex-col justify-center items-center bg-jetWhite border border-black dark:bg-jetBlackDark dark:border-white p-10 rounded-3xl border border-2-jetBlack max-w-[350px]">
+            className="min-w-50 flex flex-col justify-center items-center bg-jetWhite border border-black dark:bg-jetBlackDark dark:border-white p-10 rounded-3xl border border-2-jetBlack max-w-[350px]">
             <div id="profile-pic" className="bg-white dark:bg-jetBlack rounded-full p-5">
                 <Image src={coding} alt="Ashwin Athappan" width={150}/>
             </div>

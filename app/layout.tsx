@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 import "./globals.css";
 
+
 import React from "react";
 
 import {Poppins} from "next/font/google";
@@ -15,7 +16,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
     title: "Portfolio",
-    description: "Ashwin Athappan's portfolio",
+    description: "Ashwin Athappan's portfolio"
 };
 
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
