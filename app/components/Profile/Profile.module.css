@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+HR+Lijeva:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+/* Custom animation for image swap */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.imageContainer {
+    position: relative;
+}
+
+.imageContainer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.defaultImage {
+    opacity: 1;
+}
+
+.hoverImage {
+    opacity: 0;
+}
+
+.profileCard:hover .hoverImage {
+    opacity: 1;
+    animation: fadeIn 0.3s ease-in-out;
+}

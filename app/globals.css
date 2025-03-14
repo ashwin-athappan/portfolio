@@ -1,24 +1,97 @@
 @import "tailwindcss";
 
+@tailwind utilities;
+
+/*Tells tailwind to manually handle theme switch*/
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-light-*: initial;
+    --color-light-element: #ECE9E9;
+    --color-light-highlight: #FFFFFF;
+    --color-light-background: #F6F2F2;
+    --color-light-pale-blue: #A4CEFB;
+    --color-light-pale-pink: #F6C8D7;
+    --color-light-pale-green: #87D0B8;
+    --color-light-pale-yellow: #FAE4AC;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+    --color-dark-*: initial;
+    --color-dark-element: #0E1116;
+    --color-dark-highlight: #22262C;
+    --color-dark-nav-border: #30363d;
+    --color-dark-background: #0A0C10;
+    --color-dark-blue: #1A73E8;
+    --color-dark-pink: #E81A6E;
+    --color-dark-green: #1A8E3E;
+    --color-dark-yellow: #E8C71A;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/*.polka {*/
+/*    background-image: radial-gradient(#59637281 1.2px, #f7f2f2 1.2px);*/
+/*    background-size: 45px 45px;*/
+/*}*/
+
+/*.dark .polka {*/
+/*    background-image: radial-gradient(#9e9797 1.2px, #1a1a1a 1.2px);*/
+/*    background-size: 45px 45px;*/
+/*}*/
+
+
+#highlight {
+    position: absolute;
+    border-radius: 9999px;
+    z-index: 0;
+    /* Updated transition with shorter duration and ease-out */
+    transition: all 0.20s ease-out;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.nav-item {
+    position: relative;
+}
+
+#navbar-sticky .flex {
+    position: relative;
+}
+
+.font-playwrite {
+    font-family: 'Playwrite HR Lijeva', cursive;
+}
+
+.font-raleway {
+    font-family: 'Raleway', sans-serif;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.image-container .default-image {
+    opacity: 1;
+}
+
+.image-container .hover-image {
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.group:hover .default-image {
+    opacity: 0;
+}
+
+.group:hover .hover-image {
+    opacity: 1;
 }
