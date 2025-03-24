@@ -2,7 +2,7 @@ import {StaticImageData} from "next/image";
 
 import algoVisualizer from "@/public/assets/projects/AlgoVisualizer.png";
 import eOrganDonor from "@/public/assets/projects/EOrganDonor.png";
-import twoPC from "@/public/assets/projects/2PC.png";
+import twoPCImage from "@/public/assets/projects/2pc.png";
 import regressionAnalysis from "@/public/assets/projects/regression_analysis.jpg";
 import dailyCode from "@/public/assets/projects/daily_code.png";
 
@@ -58,7 +58,7 @@ const projects: Project[] = [
         name: "2PC Protocol",
         description:
             "This project is a simple implementation of Two Phase Commit Protocol. The project is implemented in Python and uses XMLrpc for communication between the coordinator and the participants.",
-        image: twoPC,
+        image: twoPCImage,
         github: "https://github.com/ashwin-athappan/cse-5306-assignment2",
         demo: false,
         status: false,
