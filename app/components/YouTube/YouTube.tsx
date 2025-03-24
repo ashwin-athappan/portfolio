@@ -1,7 +1,7 @@
 'use client';
 
 // pages/maps.js (or components/Maps.js)
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Image from "next/image";
 import {useTheme} from "next-themes";
 import youtube from "@/public/assets/svg/youtube.svg";
@@ -16,18 +16,25 @@ const YouTube = () => {
     const getYouTubeSubscribers = async () => {
         const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCmC64HZp0Ze9vH9pFmc9-lg&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`);
         const data = await response.json();
+
+        if (!data.items || data.items.length === 0) {
+            return 0;
+        }
+
         return data.items[0].statistics.subscriberCount;
     };
 
-    getYouTubeSubscribers().then((data) => {
-        setSubscriberCount(data);
-    });
+    useEffect(() => {
+        getYouTubeSubscribers().then((data) => {
+            setSubscriberCount(data);
+        });
+    }, []);
 
     const {theme} = useTheme();
 
-    const [mounted, setMounted] = React.useState(false);
+    const [mounted, setMounted] = useState(false);
 
-    React.useEffect(() => setMounted(true), []);
+    useEffect(() => setMounted(true), []);
 
     return (
         <div className="md:row-span-1 col-span-1 md:col-span-1 bg-white border-2 border-transparent
