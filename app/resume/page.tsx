@@ -3,6 +3,7 @@
 import React, {useEffect, useState} from 'react';
 import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
 import {useTheme} from "next-themes";
+import Link from "next/link";
 
 export default function Resume(): React.JSX.Element {
 
@@ -54,7 +55,7 @@ export default function Resume(): React.JSX.Element {
         },
         {
             name: 'Frameworks',
-            skills: ['Spring Boot', 'React.js', 'Node.js']
+            skills: ['Spring Boot', 'React.js', 'Node.js', 'Next.js', 'Django', 'Tailwind CSS'],
         },
         {
             name: 'Databases',
@@ -62,7 +63,7 @@ export default function Resume(): React.JSX.Element {
         },
         {
             name: 'Cloud & DevOps',
-            skills: ['JIRA', 'GCP', 'Docker', 'Kubernetes']
+            skills: ['Git', 'JIRA', 'GCP', 'AWS', 'Docker', 'Kubernetes', 'Linux']
         }
     ];
 
@@ -83,7 +84,7 @@ export default function Resume(): React.JSX.Element {
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 border-b-2 border-gray-900 dark:border-gray-200 pb-2">Experience</h2>
                     <div className="space-y-4">
                         <div
-                            className="bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
+                            className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
                             <h3 className="text-xl font-medium text-gray-900 dark:text-white">Software Engineer</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-300">Hughes Systique Corporation –
                                 Bangalore, Karnataka, India</p>
@@ -105,7 +106,7 @@ export default function Resume(): React.JSX.Element {
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 border-b-2 border-gray-900 dark:border-gray-200 pb-2">Education</h2>
                     <div className="space-y-6">
                         <div
-                            className="bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
+                            className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
                             <h3 className="text-xl font-medium text-gray-900 dark:text-white">M.S. in Computer
                                 Science</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-300">University of Texas at Arlington
@@ -116,7 +117,7 @@ export default function Resume(): React.JSX.Element {
                             </p>
                         </div>
                         <div
-                            className="bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
+                            className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
                             <h3 className="text-xl font-medium text-gray-900 dark:text-white">B.E. in Computer
                                 Science</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-300">New Horizon College of Engineering
@@ -134,7 +135,7 @@ export default function Resume(): React.JSX.Element {
                     <div className="space-y-6">
                         {projects.map((item, index) => (
                             <div key={index}
-                                 className="bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
+                                 className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
                                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">{item.name}</h3>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{item.technologies}</p>
                                 <p className="text-sm text-justify text-gray-600 dark:text-gray-300 mt-2">{item.description}</p>
@@ -157,7 +158,7 @@ export default function Resume(): React.JSX.Element {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {skills.map((item, index) => (
                             <div key={index}
-                                 className="bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-4 rounded-lg shadow-sm">
+                                 className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-4 rounded-lg shadow-sm">
                                 <h3 className="text-lg font-medium text-gray-900 dark:text-white">{item.name}</h3>
                                 <div className="flex flex-wrap gap-2 mt-1">
                                     {item.skills.map((skill, idx) => (
@@ -173,6 +174,13 @@ export default function Resume(): React.JSX.Element {
                         ))}
                     </div>
                 </section>
+            </div>
+            <div className="flex justify-center">
+                <Link href={'https://drive.google.com/file/d/1EjJYH28hUvfGGrZBwNliL1gjAHtEbYI0/view?usp=sharing'}
+                      target={'_blank'}
+                      className="text-dark-element dark:text-white rounded-2xl bg-[#6CB4EE] dark:bg-[#00308F] px-6 py-2 transition-all duration-700 ease-in-out">
+                    Download
+                </Link>
             </div>
         </div>
     );

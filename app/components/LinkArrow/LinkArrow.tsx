@@ -11,9 +11,10 @@ interface LinkArrowProps {
     mounted: boolean;
     theme: string | undefined;
     linkType: string;
+    text?: string;
 }
 
-const LinkArrow = ({link, mounted, theme, linkType}: LinkArrowProps): React.JSX.Element => {
+const LinkArrow = ({link, mounted, theme, linkType, text}: LinkArrowProps): React.JSX.Element => {
 
     const moveStickyNavTablet = () => {
         if (linkType === "internal") {
@@ -24,12 +25,13 @@ const LinkArrow = ({link, mounted, theme, linkType}: LinkArrowProps): React.JSX.
         }
     }
 
+
     return (
         <Link
             href={link}
             target={linkType === "external" ? "_blank" : "_self"}
             onClick={moveStickyNavTablet}
-            className="bg-white dark:bg-dark-element w-10 h-10 rounded-full absolute bottom-4 left-4 flex justify-center items-center ring-1 ring-gray-400 hover:ring-4 hover:ring-gray-200 transition-all duration-700 ease-in-out"
+            className={`bg-white dark:bg-dark-element w-10 h-10 rounded-full absolute bottom-4 left-4 flex justify-center items-center ring-1 ring-gray-400 hover:ring-4 hover:ring-gray-200 transition-all duration-700 ease-in-out`}
         >
             {mounted ? (
                 theme === "dark" ? (
@@ -40,6 +42,7 @@ const LinkArrow = ({link, mounted, theme, linkType}: LinkArrowProps): React.JSX.
             ) : (
                 <Image src={darkArrow} alt="default arrow" width={20} height={20}/>
             )}
+            {text && <span className="ml-2">{text}</span>}
         </Link>
     );
 };

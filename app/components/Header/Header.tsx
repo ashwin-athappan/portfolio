@@ -1,20 +1,15 @@
 'use client';
 
-import hamburger from '@/public/assets/hamburger.svg';
-import React, { useState, useRef, useEffect } from "react";
+import React, {useState, useRef, useEffect} from "react";
 import {usePathname, useRouter} from 'next/navigation';
 import Link from 'next/link';
-import Image from "next/image";
 import '../../globals.css';
 import ThemeSwitch from "@/app/components/ThemeSwitch/ThemeSwitch";
 
 const Header = (): React.JSX.Element => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeMenu, setActiveMenu] = useState('About');
     const highlightRef = useRef<HTMLDivElement>(null);
 
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-    const closeMenu = () => setIsMenuOpen(false);
 
     const router = useRouter();
 
@@ -23,7 +18,6 @@ const Header = (): React.JSX.Element => {
         {name: 'Tools', link: '/tools'},
         {name: 'Projects', link: '/projects'},
         {name: 'Resume', link: '/resume'},
-        {name: 'Content', link: '/content'},
     ];
 
     useEffect(() => {
@@ -47,30 +41,19 @@ const Header = (): React.JSX.Element => {
         const item = menuItems.find(item => item.link === pathname);
         if (item) {
             setActiveMenu(item.name);
-            closeMenu();
         }
     }, []);
 
 
     return (
         <nav className="bg-transparent backdrop-filter backdrop-blur-sm fixed w-full z-40 top-0">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div className="max-w-screen-xl flex justify-between items-center mx-auto p-4">
                 <h2 className="font-bold text-sky-800 text-[25px] lg:text-[20px]">
-                    <Link href="/public">Ashwin</Link>
+                    <Link href="/">Ashwin</Link>
                 </h2>
-                <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse" onClick={toggleMenu}>
-                    <button data-collapse-toggle="navbar-sticky" type="button"
-                            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                            aria-controls="navbar-sticky" aria-expanded="false">
-                        <span className="sr-only">Open menu</span>
-                        <Image src={hamburger} alt="menu"/>
-                    </button>
-                </div>
-                <div
-                    className={`items-center bg-nav justify-between w-full md:flex md:w-auto md:order-1 ${isMenuOpen ? 'block' : 'hidden'}`}
-                    id="navbar-sticky">
+                <div className="items-center bg-nav justify-between flex w-auto" id="navbar-sticky">
                     <div
-                        className="flex justify-center flex-col p-2 bg-light-element dark:bg-dark-background dark:border-2 dark:border-dark-nav-border rounded-[20px] md:rounded-[30px] md:flex-row text-md font-extrabold relative">
+                        className="flex justify-center flex-row p-2 bg-light-element dark:bg-dark-background dark:border-2 dark:border-dark-nav-border rounded-[30px] text-md font-extrabold relative">
                         <div
                             ref={highlightRef}
                             id="highlight"
@@ -89,7 +72,6 @@ const Header = (): React.JSX.Element => {
                                      onClick={(e: React.MouseEvent<HTMLElement>) => {
                                          e.preventDefault();
                                          setActiveMenu(item.name);
-                                         closeMenu();
                                          router.push(item.link);
                                      }}
                                      className={classes}>
@@ -98,8 +80,8 @@ const Header = (): React.JSX.Element => {
                             );
                         })}
                     </div>
-                    <ThemeSwitch/>
                 </div>
+                <ThemeSwitch/>
             </div>
         </nav>
     );

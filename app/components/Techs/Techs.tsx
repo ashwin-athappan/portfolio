@@ -54,10 +54,10 @@ const Techs = () => {
 
     return (
         <div
-            className={`md:row-span-2 col-span-2 md:col-span-1 
+            className={`md:row-span-2 col-span-1 
             bg-white bg-[url(/assets/bg/topographic_black.svg)] border-2 border-transparent 
             dark:bg-dark-element dark:bg-[url(/assets/bg/topographic_white.svg)] dark:border-2 dark:border-dark-nav-border 
-            rounded-[30px] relative h-[560px] overflow-hidden flex hover:shadow-lg dark:hover:shadow-xl`}>
+            rounded-[30px] relative h-[576px] overflow-hidden flex hover:shadow-lg dark:hover:shadow-xl`}>
             <div className="grid gap-4 grid-cols-3 rotate-[35deg] absolute bottom-20 -right-20">
                 {techs.map((tech, index) => (
                     <div key={index} className="contents">

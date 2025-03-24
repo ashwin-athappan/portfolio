@@ -28,13 +28,13 @@ const Projects = () => {
                     <div className="grid grid-cols-4 sm:mb-4">
                         {/* Image */}
                         <div className="md:col-span-2 col-span-4">
-                            <Image
-                                className="w-full h-[100px] md:h-full object-contain rounded-lg p-2"
-                                src={project.image}
-                                alt={project.name}
-                                width={200}
-                                height={100}
-                            />
+                                <Image
+                                    className="w-full h-[100px] md:h-full max-h-[260px] object-contain rounded-lg p-2"
+                                    src={project.image}
+                                    alt={project.name}
+                                    width={200}
+                                    height={100}
+                                />
                         </div>
 
                         {/* Text */}

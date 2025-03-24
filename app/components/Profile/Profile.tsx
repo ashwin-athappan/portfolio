@@ -33,13 +33,13 @@ const Profile = () => {
         <div
             className={`${styles.profileCard} ${gridCols} bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border rounded-[30px] p-6 flex flex-col md:gap-4 h-[280px] hover:shadow-lg dark:hover:shadow-xl`}>
             <div className="flex justify-between">
-                <div className={`${styles.imageContainer} relative w-20- h-20 lg:w-25 lg:h-25`}>
+                <div className={`${styles.imageContainer} relative w-20 h-20 lg:w-25 lg:h-25`}>
                     <Image
                         className={`${styles.defaultImage} w-full h-full object-cover`}
                         src={coding}
                         alt="default image"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                     />
                 </div>
                 <p className="w-[80%] font-medium text-gray-500 dark:text-gray-300 text-md text-justify">
@@ -53,7 +53,6 @@ const Profile = () => {
                     My expertise also includes database management, performance testing with JMeter, and software
                     development
                     workflows using Git, Maven, and JIRA. I am proficient in <span className="font-semibold">Python, Java, JavaScript, and TypeScript</span>.
-                    In my free time, I love listening to music and playing video games.
                 </p>
             </div>
         </div>
