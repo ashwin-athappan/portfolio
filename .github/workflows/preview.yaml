@@ -3,7 +3,7 @@ name: Portfolio Preview Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+  NEXT_PUBLIC_GOOGLE_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_API_KEY }}
   MONGODB_URL: ${{ secrets.MONGODB_URL }}
 
 on:
