@@ -75,7 +75,7 @@ const Techs = () => {
                                         alt={tech.alt}
                                         width={64}
                                         height={64}
-                                        className="w-10 lg:w-16"
+                                        className="p-5 h-auto w-auto"
                                     />
                                 )}
                             </a>
@@ -90,7 +90,7 @@ const Techs = () => {
                                         alt={tech.alt}
                                         width={64}
                                         height={64}
-                                        className="w-10 lg:w-16"
+                                        className="p-5 h-auto w-auto"
                                     />
                                 )}
                             </div>

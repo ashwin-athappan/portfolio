@@ -21,7 +21,7 @@ const LinkedIn = () => {
     return (
         <div className="md:row-span-1 col-span-1 md:col-span-1 bg-[#0077B5] border-2 border-transparent
             rounded-[30px] relative h-[280px] justify-center overflow-hidden flex hover:shadow-lg dark:hover:shadow-xl">
-            <Image src={linkedin} alt="GitHub" width={200} height={200}/>
+            <Image src={linkedin} alt="GitHub" width={200} height={200} className="p-10 h-auto w-auto"/>
             <LinkArrow link={linkedInURL} mounted={mounted} theme={theme} linkType={"external"}/>
         </div>
     );

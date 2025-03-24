@@ -2,9 +2,6 @@
 
 import React, {useEffect, useState} from "react";
 import Image, {StaticImageData} from "next/image";
-import lightArrow from "@/public/assets/arrows/light_arrow.svg";
-import darkArrow from "@/public/assets/arrows/dark_arrow.svg";
-import Link from "next/link";
 import {useTheme} from "next-themes";
 import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
 

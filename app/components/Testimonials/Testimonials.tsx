@@ -6,8 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 
 import blank_user_black from "@/public/assets/svg/user_black.svg";
-import blank_user_white from "@/public/assets/svg/user_white.svg";
-import {useTheme} from "next-themes";
+// import {useTheme} from "next-themes";
 
 interface TestimonialRelation {
     FRIEND: "Friend";
@@ -26,7 +25,7 @@ interface TestimonialProps {
 
 const Testimonials = (): React.JSX.Element => {
 
-    const {theme} = useTheme();
+    // const {theme} = useTheme();
 
     const testimonials: TestimonialProps[] = [
         {
@@ -93,14 +92,14 @@ const Testimonials = (): React.JSX.Element => {
                 <div
                     key={row}
                     className="relative mx-5 overflow-hidden"
-                    onMouseEnter={(e) => {
-                        const container = e.currentTarget.querySelector('#animate_scroll');
-                        if (container) container.style.animationPlayState = 'paused';
-                    }}
-                    onMouseLeave={(e) => {
-                        const container = e.currentTarget.querySelector('#animate_scroll');
-                        if (container) container.style.animationPlayState = 'running';
-                    }}
+                    // onMouseEnter={(e) => {
+                    //     const container = e.currentTarget.querySelector('#animate_scroll');
+                    //     if (container) container.style.animationPlayState = 'paused';
+                    // }}
+                    // onMouseLeave={(e) => {
+                    //     const container = e.currentTarget.querySelector('#animate_scroll');
+                    //     if (container) container.style.animationPlayState = 'running';
+                    // }}
                 >
                     <div id="animate_scroll" className={`flex ${styles.animate_scroll}`}>
                         {[...testimonials, ...testimonials].map((testimonial, index) => (

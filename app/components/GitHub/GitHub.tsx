@@ -7,7 +7,6 @@ import {useTheme} from "next-themes";
 import github_dark from '@/public/assets/svg/github.svg';
 import github_light from '@/public/assets/svg/github_white.svg';
 import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
-import Link from "next/link";
 
 const GitHub = () => {
     const githubUrl = "https://github.com/ashwin-athappan";
@@ -33,7 +32,7 @@ const GitHub = () => {
         <div className="md:row-span-1 col-span-1 md:col-span-1 bg-white border-2 border-transparent
             dark:bg-dark-element dark:border-2 dark:border-dark-nav-border
             rounded-[30px] relative h-[280px] justify-center overflow-hidden flex hover:shadow-lg dark:hover:shadow-xl">
-            <Image src={githubImage} alt="GitHub" width={200} height={200}/>
+            <Image src={githubImage} alt="GitHub" width={200} height={200} className="p-10 h-auto w-auto"/>
             <LinkArrow link={githubUrl} mounted={mounted} theme={theme} linkType={"external"}/>
         </div>
     );

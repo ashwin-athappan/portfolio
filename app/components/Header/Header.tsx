@@ -1,10 +1,22 @@
 'use client';
 
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect, useMemo} from "react";
 import {usePathname, useRouter} from 'next/navigation';
 import Link from 'next/link';
 import '../../globals.css';
 import ThemeSwitch from "@/app/components/ThemeSwitch/ThemeSwitch";
+
+interface menuItemProps {
+    name: string;
+    link: string;
+}
+
+const menuItemsInitial: menuItemProps[] = [
+    {name: 'About', link: '/'},
+    {name: 'Tools', link: '/tools'},
+    {name: 'Projects', link: '/projects'},
+    {name: 'Resume', link: '/resume'},
+];
 
 const Header = (): React.JSX.Element => {
     const [activeMenu, setActiveMenu] = useState('About');
@@ -13,12 +25,7 @@ const Header = (): React.JSX.Element => {
 
     const router = useRouter();
 
-    const menuItems = [
-        {name: 'About', link: '/'},
-        {name: 'Tools', link: '/tools'},
-        {name: 'Projects', link: '/projects'},
-        {name: 'Resume', link: '/resume'},
-    ];
+    const menuItems = useMemo(() => ([...menuItemsInitial]), [])
 
     useEffect(() => {
         const activeElement = document.querySelector('.nav-item.nav-highlight') as HTMLElement;
@@ -42,7 +49,7 @@ const Header = (): React.JSX.Element => {
         if (item) {
             setActiveMenu(item.name);
         }
-    }, []);
+    }, [menuItems, pathname]);
 
 
     return (

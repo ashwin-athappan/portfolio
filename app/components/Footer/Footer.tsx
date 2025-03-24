@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Testimonials from "@/app/components/Testimonials/Testimonials";
 
 
 const Footer = (): React.JSX.Element => {
