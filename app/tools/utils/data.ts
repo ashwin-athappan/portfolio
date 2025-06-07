@@ -12,6 +12,14 @@ import HackerRankJavaScriptBasic from "@/public/assets/certificates/JSBasic.png"
 import HackerRankPythonBasic from "@/public/assets/certificates/PythonBasic.png";
 import HackerRankSQLBasic from "@/public/assets/certificates/SQLBasic.png";
 
+import DockerProfessionalCertificate from "@/public/assets/certificates/docker-foundations-professional-certificate.jpg";
+
+import AWSIntroCloud101 from "@/public/assets/certificates/aws-educate-introduction-to-cloud-101.png";
+import AWSGettingStartedStorage from "@/public/assets/certificates/aws-educate-getting-started-with-storage.png";
+import AWSGettingStartedCompute from "@/public/assets/certificates/aws-educate-getting-started-with-compute.png";
+import AWSGettingStartedDatabases from "@/public/assets/certificates/aws-educate-getting-started-with-databases.png";
+import AWSGettingStartedNetworking from "@/public/assets/certificates/aws-educate-getting-started-with-networking.png";
+
 import html from "@/public/assets/svg/html5.svg";
 import css from "@/public/assets/svg/css3.svg";
 import nextjs from "@/public/assets/svg/nextjs2.svg";
@@ -62,6 +70,46 @@ interface toolsAndTechnologiesProps {
 }
 
 const certificates: certificationProps[] = [
+    {
+        id: "3c88ec3848f3",
+        title: "Introduction to Cloud 101",
+        issuedBy: "Amazon Web Services (AWS)",
+        link: "https://www.credly.com/badges/4265aa52-1526-4fca-8d58-9283fd200be9/linked_in_profile",
+        image: AWSIntroCloud101,
+        skills: ["Amazon Web Services", "Cloud Computing"]
+    },
+    {
+        id: "3c88ec3848f4",
+        title: "Getting Started with Storage",
+        issuedBy: "Amazon Web Services (AWS)",
+        link: "https://www.credly.com/badges/74f52d60-f7e5-41ed-9da6-b4850934aa10/linked_in_profile",
+        image: AWSGettingStartedStorage,
+        skills: ["Amazon Web Services", "Cloud Computing"]
+    },
+    {
+        id: "3c88ec3848f5",
+        title: "Getting Started with Compute",
+        issuedBy: "Amazon Web Services (AWS)",
+        link: "https://www.credly.com/badges/028e8775-f8c5-45f9-8001-c27c63cfb78d/linked_in_profile",
+        image: AWSGettingStartedCompute,
+        skills: ["Amazon Web Services", "Amazon EC2", "Amazon VPC"]
+    },
+    {
+        id: "3c88ec3848f6",
+        title: "Getting Started with Databases",
+        issuedBy: "Amazon Web Services (AWS)",
+        link: "https://www.credly.com/badges/dfa96d74-8876-418c-8f4c-7945830e8235/linked_in_profile",
+        image: AWSGettingStartedDatabases,
+        skills: ["Amazon Web Services", "Amazon RDS", "Amazon Aurora", "Amazon DynamoDB"]
+    },
+    {
+        id: "3c88ec3848f7",
+        title: "Getting Started with Networking",
+        issuedBy: "Amazon Web Services (AWS)",
+        link: "https://www.credly.com/badges/1f855631-98f7-4d34-94c8-bfa00fd17f46/public_url",
+        image: AWSGettingStartedNetworking,
+        skills: ["Amazon Web Services", "Amazon EC2", "Amazon VPC"]
+    },
     {
         id: "8fae776a-44f9-4aef-be5d-8d015a773e76",
         title: "GitHub Foundations",
@@ -133,6 +181,14 @@ const certificates: certificationProps[] = [
         link: "https://www.hackerrank.com/certificates/3c88ec3848f1",
         image: HackerRankSQLBasic,
         skills: ["SQL", "Database", "Relational Database"]
+    },
+    {
+        id: "3c88ec3848f2",
+        title: "Docker Foundations Professional Certificate",
+        issuedBy: "Docker",
+        link: "https://www.linkedin.com/learning/certificates/83ed7bfb44befc81d33188fcf69873f7dfa1a9b4a2bad80cbc095249b39171f8",
+        image: DockerProfessionalCertificate,
+        skills: ["Docker Products", "Containerization", "Docker"]
     }
 ];
 
