@@ -15,14 +15,38 @@ export default function Resume(): React.JSX.Element {
     }, []);
 
     const experiences = [
-        'Led the transition from a monolithic to a microservices-based architecture using Spring Boot and Node.js, improving system performance by 40% and enabling future scalability.',
-        'Migrated 100+ SOAP-based APIs to REST APIs, reducing bandwidth usage by 30% and improving interoperability with third-party services.',
-        'Designed and optimized CI/CD pipelines using Docker, Kubernetes, and Jenkins, cutting deployment time by 50% and accelerating software releases.',
-        'Conducted regression testing for 100+ APIs, achieving 98% test coverage and resolving 20+ critical bugs, reducing post-deployment defects by 70%.',
-        'Implemented Liquibase for database change management, reducing rollback time from 1-2 days to just 5-10 minutes, improving visibility into changes, and enabling seamless tracking of modiﬁcations by team members.'
+        {
+            position: 'Student Administrative Assistant',
+            company: 'University of Texas at Arlington',
+            location: 'Arlington, TX',
+            duration: 'Jun 2025 - Present',
+            details: [
+                'Created Python scripts to construct a pipeline that managed day-to-day schedule updates reducing manual intervention by 90%',
+                'Developed a barcode-based Asset Tracking App to log check-in/out activity, cutting manual data entry time by 70% and improving reporting accuracy',
+                'Automated workflows using Power Automate, Office365 API, and Excel Script, streamlining admin processes',
+                'Supervised and delegated tasks to a team of 20 student workers, ensuring efficient day-to-day operations'
+            ]
+        },
+        {
+            position: 'Backend Developer & DevOps Engineer',
+            company: 'Hughes Systique Corporation',
+            location: 'Bangalore, India',
+            duration: 'Jan 2022 – Jul 2024',
+            details: [
+                'Migrated monoliths to Spring Boot/Node.js microservices, improving overall availability to 90%',
+                'Replaced 100+ SOAP APIs with RESTful services, reducing network overheads and payload size by 30%',
+                'Integrated Liquibase for DB changes, reducing rollback time from days to minutes',
+                'Built CI/CD pipelines with Docker, Kubernetes, Jenkins, and GKE, reducing deployment time by 50%'
+            ]
+        },
     ];
 
     const projects = [
+        {
+          name: 'University Center Asset Management Dashboard',
+            technologies: 'Next.js, Vercel, Tailwind CSS, Firestore, TypeScript',
+            description: 'Built a web-based asset management dashboard for the University Center with integrated barcode scanning to streamline inventory tracking and reduce manual errors'
+        },
         {
             name: 'Algo Visualizer',
             technologies: 'Java, Spring Boot, Bash, Maven',
@@ -51,7 +75,7 @@ export default function Resume(): React.JSX.Element {
     const skills = [
         {
             name: 'Programming',
-            skills: ['Java', 'Python', 'JavaScript', 'TypeScript']
+            skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'SQL', 'C++', 'Bash']
         },
         {
             name: 'Frameworks',
@@ -59,11 +83,15 @@ export default function Resume(): React.JSX.Element {
         },
         {
             name: 'Databases',
-            skills: ['MongoDB', 'MySQL', 'Oracle DB']
+            skills: ['MongoDB', 'MySQL', 'Oracle DB', 'Redis']
         },
         {
             name: 'Cloud & DevOps',
             skills: ['Git', 'JIRA', 'GCP', 'AWS', 'Docker', 'Kubernetes', 'Linux']
+        },
+        {
+            name: 'ML/AI',
+            skills: ['Scikit-learn', 'Pandas', 'NumPy', 'PyTorch', 'Neural Networks', 'Regression Analysis']
         }
     ];
 
@@ -83,21 +111,20 @@ export default function Resume(): React.JSX.Element {
                 <section className="mb-12">
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 border-b-2 border-gray-900 dark:border-gray-200 pb-2">Experience</h2>
                     <div className="space-y-4">
-                        <div
-                            className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
-                            <h3 className="text-xl font-medium text-gray-900 dark:text-white">Software Engineer</h3>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">Hughes Systique Corporation –
-                                Bangalore, Karnataka, India</p>
-                            <div
-                                className="mt-3 space-y-2 text-gray-600 dark:text-gray-300 text-sm list-disc list-inside">
-                                {experiences.map((experience, index) => (
-                                    <div className="flex" key={index}>
-                                        <p className="mr-2">•</p>
-                                        <p>{experience}</p>
-                                    </div>
-                                ))}
+                        {/*Map over the new experience array of objects*/}
+                        {experiences.map(experience => (
+                            <div key={experience.position + experience.company}
+                                 className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
+                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">{experience.position}</h3>
+                                <p className="text-sm text-gray-600 dark:text-gray-300">{experience.company} | {experience.location}</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{experience.duration}</p>
+                                <ul className="list-disc list-inside mt-2 space-y-1 text-gray-600 dark:text-gray-300">
+                                    {experience.details.map((detail, index) => (
+                                        <li key={index}>{detail}</li>
+                                    ))}
+                                </ul>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </section>
 
@@ -176,7 +203,7 @@ export default function Resume(): React.JSX.Element {
                 </section>
             </div>
             <div className="flex justify-center">
-                <Link href={'https://drive.google.com/file/d/1EjJYH28hUvfGGrZBwNliL1gjAHtEbYI0/view?usp=sharing'}
+                <Link href={'https://drive.google.com/file/d/1Kj2YU2u7dB23wOzq3VyJWMlYnQLsvHKa/view?usp=sharing'}
                       target={'_blank'}
                       className="text-dark-element dark:text-white rounded-2xl bg-[#6CB4EE] dark:bg-[#00308F] px-6 py-2 transition-all duration-700 ease-in-out">
                     Download
