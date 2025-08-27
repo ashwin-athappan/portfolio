@@ -16,10 +16,20 @@ export default function Resume(): React.JSX.Element {
 
     const experiences = [
         {
+            position: 'Graduate Teaching Assistant',
+            company: 'University of Texas at Arlington',
+            location: 'Arlington, TX',
+            duration: 'Aug 2025 - Present',
+            details: [
+                'Instructed 60+ students through hands-on labs in Assembly and OS fundamentals (RISC-V/x86, Linux syscalls, processes/threads, memory, synchronization, GDB), improving average lab completion rate by 15%',
+                'Evaluated and provided feedback on 100+ lab/programming assignments; facilitated office hours and exam prep sessions',
+            ]
+        },
+        {
             position: 'Student Administrative Assistant',
             company: 'University of Texas at Arlington',
             location: 'Arlington, TX',
-            duration: 'Jun 2025 - Present',
+            duration: 'Jun 2025 - Aug 2025',
             details: [
                 'Created Python scripts to construct a pipeline that managed day-to-day schedule updates reducing manual intervention by 90%',
                 'Developed a barcode-based Asset Tracking App to log check-in/out activity, cutting manual data entry time by 70% and improving reporting accuracy',
