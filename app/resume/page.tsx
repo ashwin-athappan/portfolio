@@ -53,7 +53,7 @@ export default function Resume(): React.JSX.Element {
 
     const projects = [
         {
-          name: 'University Center Asset Management Dashboard',
+            name: 'University Center Asset Management Dashboard',
             technologies: 'Next.js, Vercel, Tailwind CSS, Firestore, TypeScript',
             description: 'Built a web-based asset management dashboard for the University Center with integrated barcode scanning to streamline inventory tracking and reduce manual errors'
         },
@@ -213,7 +213,7 @@ export default function Resume(): React.JSX.Element {
                 </section>
             </div>
             <div className="flex justify-center">
-                <Link href={'https://drive.google.com/file/d/1Kj2YU2u7dB23wOzq3VyJWMlYnQLsvHKa/view?usp=sharing'}
+                <Link href={'https://drive.google.com/file/d/13AKKoKK613lFA8PeJuoD_fMgsv02oXlW/view?usp=sharing'}
                       target={'_blank'}
                       className="text-dark-element dark:text-white rounded-2xl bg-[#6CB4EE] dark:bg-[#00308F] px-6 py-2 transition-all duration-700 ease-in-out">
                     Download
