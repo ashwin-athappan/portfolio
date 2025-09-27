@@ -4,6 +4,25 @@ import React, {useEffect, useState} from 'react';
 import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
 import {useTheme} from "next-themes";
 import Link from "next/link";
+import WorkExperienceTimeLineComponent
+    from "@/app/components/WorkExperienceTimeLineComponent/WorkExperienceTimeLineComponent";
+
+interface WorkExperience {
+    duration: string;
+    position: string;
+    company: string;
+    location: string;
+    startDate: Date;
+    details: string | string[];
+}
+
+interface Project {
+    name: string,
+    startDate: Date,
+    technologies: string,
+    details: string | string[]
+    link?: string;
+}
 
 export default function Resume(): React.JSX.Element {
 
@@ -14,12 +33,13 @@ export default function Resume(): React.JSX.Element {
         setMounted(true);
     }, []);
 
-    const experiences = [
+    const experiences: WorkExperience[] = [
         {
             position: 'Graduate Teaching Assistant',
             company: 'University of Texas at Arlington',
             location: 'Arlington, TX',
             duration: 'Aug 2025 - Present',
+            startDate: new Date('2025-08-01'),
             details: [
                 'Instructed 60+ students through hands-on labs in Assembly and OS fundamentals (RISC-V/x86, Linux syscalls, processes/threads, memory, synchronization, GDB), improving average lab completion rate by 15%',
                 'Evaluated and provided feedback on 100+ lab/programming assignments; facilitated office hours and exam prep sessions',
@@ -30,6 +50,7 @@ export default function Resume(): React.JSX.Element {
             company: 'University of Texas at Arlington',
             location: 'Arlington, TX',
             duration: 'Jun 2025 - Aug 2025',
+            startDate: new Date('2025-08-01'),
             details: [
                 'Created Python scripts to construct a pipeline that managed day-to-day schedule updates reducing manual intervention by 90%',
                 'Developed a barcode-based Asset Tracking App to log check-in/out activity, cutting manual data entry time by 70% and improving reporting accuracy',
@@ -42,6 +63,7 @@ export default function Resume(): React.JSX.Element {
             company: 'Hughes Systique Corporation',
             location: 'Bangalore, India',
             duration: 'Jan 2022 – Jul 2024',
+            startDate: new Date('2022-01-01'),
             details: [
                 'Migrated monoliths to Spring Boot/Node.js microservices, improving overall availability to 90%',
                 'Replaced 100+ SOAP APIs with RESTful services, reducing network overheads and payload size by 30%',
@@ -51,36 +73,50 @@ export default function Resume(): React.JSX.Element {
         },
     ];
 
-    const projects = [
+    const projects: Project[] = [
         {
             name: 'University Center Asset Management Dashboard',
+            startDate: new Date('2025-07-09'),
             technologies: 'Next.js, Vercel, Tailwind CSS, Firestore, TypeScript',
-            description: 'Built a web-based asset management dashboard for the University Center with integrated barcode scanning to streamline inventory tracking and reduce manual errors'
+            details: 'Built a web-based asset management dashboard for the University Center with integrated barcode scanning to streamline inventory tracking and reduce manual errors'
         },
         {
             name: 'Algo Visualizer',
+            startDate: new Date('2021-05-01'),
             technologies: 'Java, Spring Boot, Bash, Maven',
-            description: 'I built an algorithm visualizer in my college as an inspirational project. It showcases sorting (Bubble, Insertion, Selection, Merge, Quick Sort), scheduling (FCFS, SJF, Priority, Round Robin), graph traversal (DFS, BFS, Dijkstra’s, Prim’s MST), N Queens, searching (Linear, Binary), BST operations, and stack/queue operations. It features step-by-step animations, speed control, and input customization for enhanced learning. This website was deployed on GitHub pages using GitHub Actions.',
+            details: 'I built an algorithm visualizer in my college as an inspirational project. It showcases sorting (Bubble, Insertion, Selection, Merge, Quick Sort), scheduling (FCFS, SJF, Priority, Round Robin), graph traversal (DFS, BFS, Dijkstra’s, Prim’s MST), N Queens, searching (Linear, Binary), BST operations, and stack/queue operations. It features step-by-step animations, speed control, and input customization for enhanced learning. This website was deployed on GitHub pages using GitHub Actions.',
             link: 'https://ashwin-athappan.github.io/algo-visualizer-deploy/'
         },
         {
             name: 'File Synchronization System',
+            startDate: new Date('2024-09-01'),
             technologies: 'Java, Spring Boot, Bash, Maven',
-            description: 'Developed a command-line tool for file upload, download, and deletion with fault tolerance, transaction tracking, and recovery to ensure seamless operation and consistency during client-server interactions.',
+            details: 'Developed a command-line tool for file upload, download, and deletion with fault tolerance, transaction tracking, and recovery to ensure seamless operation and consistency during client-server interactions.',
             link: 'https://github.com/ashwin-athappan/cse-5306-assignment1'
         },
         {
             name: 'Ecommerce Website',
+            startDate: new Date('2025-05-01'),
             technologies: 'Next.js, Tailwind CSS, MongoDB',
-            description: 'Developed a responsive e-commerce website using Next.js and Tailwind CSS, integrating MongoDB for efficient data storage and retrieval. Implemented features such as user authentication, product search, shopping cart functionality, and order processing, ensuring optimal performance and a seamless user experience. Focused on clean, reusable code and leveraging Next.js for enhanced SEO and dynamic routing.'
+            details: 'Developed a responsive e-commerce website using Next.js and Tailwind CSS, integrating MongoDB for efficient data storage and retrieval. Implemented features such as user authentication, product search, shopping cart functionality, and order processing, ensuring optimal performance and a seamless user experience. Focused on clean, reusable code and leveraging Next.js for enhanced SEO and dynamic routing.'
+        },
+        {
+            name: 'Event Management System',
+            startDate: new Date('2021-05-01'),
+            technologies: 'Next.js, Node.js, Postgres, PrismaORM, JIRA, Agile, Docker, Kubernetes',
+            details: 'Worked collaboratively with a Team of 3 to build an event-management-system. Organized JIRA dashboard to assist development and organized daily SCRUM calls'
         },
         {
             name: 'eOrganDonor',
+            startDate: new Date('2021-01-01'),
             technologies: 'Django, Python, HTML, CSS',
-            description: 'Developed a web application using Django to facilitate organ donation and transplantation. Implemented features such as user registration, organ donation requests, donor matching, and donor-recipient communication. Ensured data security and privacy by integrating user authentication, authorization, and encryption protocols. Dockerized the application for scalability.',
+            details: 'Developed a web application using Django to facilitate organ donation and transplantation. Implemented features such as user registration, organ donation requests, donor matching, and donor-recipient communication. Ensured data security and privacy by integrating user authentication, authorization, and encryption protocols. Dockerized the application for scalability.',
             link: 'https://github.com/ashwin-athappan/e_Organ_Donor-Django'
         }
     ];
+
+    const workExperienceTimeline = experiences.sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
+    const projectTimeline = projects.sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
 
     const skills = [
         {
@@ -144,20 +180,7 @@ export default function Resume(): React.JSX.Element {
                 <section className="mb-12">
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 border-b-2 border-gray-900 dark:border-gray-200 pb-2">Experience</h2>
                     <div className="space-y-4">
-                        {/*Map over the new experience array of objects*/}
-                        {experiences.map(experience => (
-                            <div key={experience.position + experience.company}
-                                 className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
-                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">{experience.position}</h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-300">{experience.company} | {experience.location}</p>
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{experience.duration}</p>
-                                <ul className="list-disc list-inside mt-2 space-y-1 text-gray-600 dark:text-gray-300">
-                                    {experience.details.map((detail, index) => (
-                                        <li key={index}>{detail}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+                        <WorkExperienceTimeLineComponent events={workExperienceTimeline}/>
                     </div>
                 </section>
 
