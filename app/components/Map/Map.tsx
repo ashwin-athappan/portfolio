@@ -2,10 +2,6 @@
 
 // pages/maps.js (or components/Maps.js)
 import {useEffect, useState} from 'react';
-import styles from './Map.module.css';
-import Image from "next/image";
-
-import not_bragging from '@/public/assets/me/not_bragging.png';
 
 // Simple in-memory cache service (equivalent to MapCacheService)
 const mapCache = {

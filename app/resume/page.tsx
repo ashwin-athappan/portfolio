@@ -20,7 +20,7 @@ interface Project {
     name: string,
     startDate: Date,
     technologies: string,
-    details: string | string[]
+    details: string;
     link?: string;
 }
 
@@ -116,7 +116,7 @@ export default function Resume(): React.JSX.Element {
     ];
 
     const workExperienceTimeline = experiences.sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
-    const projectTimeline = projects.sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
+    // const projectTimeline = projects.sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
 
     const skills = [
         {
@@ -221,7 +221,7 @@ export default function Resume(): React.JSX.Element {
                                  className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-6 rounded-lg shadow-sm">
                                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">{item.name}</h3>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{item.technologies}</p>
-                                <p className="text-sm text-justify text-gray-600 dark:text-gray-300 mt-2">{item.description}</p>
+                                <p className="text-sm text-justify text-gray-600 dark:text-gray-300 mt-2">{item.details}</p>
                                 {item.link && (
                                     <div
                                         className="flex flex-col justify-center min-h-10 left-[-17px] top-7 items-start relative group">
