@@ -35,7 +35,9 @@ const Map = () => {
             setMapUrl(cachedUrl);
         } else {
 
-            const url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d311.8305188159363!2d-97.11503502124208!3d32.72689034513839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e7d133a6a4ab1%3A0x68fc7be57ddc95e9!2s721%20W%20Mitchell%20Cir%2C%20Arlington%2C%20TX%2076013!5e0!3m2!1sen!2sus!4v1740872727981!5m2!1sen!2sus"
+            // To replace this URL go to Google Maps, find a location, share -> embed then copy url.
+
+            const url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.198732530188!2d-97.12248772392206!3d32.73391328618675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e7d0c29dff3f5%3A0x6664eeaccb6a1a47!2s402%20Kerby%20St%2C%20Arlington%2C%20TX%2076013!5e0!3m2!1sen!2sus!4v1758909094897!5m2!1sen!2sus"
             mapCache.setMapDetails(url);
             setMapUrl(url);
         }
@@ -58,23 +60,6 @@ const Map = () => {
                         style={{borderRadius: '20px'}}
                     />
                 )}
-                <div
-                    className={`${styles.hoverShake} absolute inset-0 m-auto w-28 h-28 border-[5px] border-white rounded-full flex items-center justify-center bg-sky-400/55 dark:bg-slate-500/50`}>
-                    <Image
-                        src={not_bragging}
-                        alt="Default Image"
-                        className={`${styles.shake} ${styles.defaultImage} w-20`}
-                        height={150}
-                        width={150}
-                    />
-                    <Image
-                        src={not_bragging}
-                        alt="Hover Image"
-                        className={`${styles.shake} ${styles.hoverImage} w-20`}
-                        height={50}
-                        width={50}
-                    />
-                </div>
             </div>
         </div>
     );

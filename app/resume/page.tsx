@@ -93,7 +93,7 @@ export default function Resume(): React.JSX.Element {
         },
         {
             name: 'Databases',
-            skills: ['MongoDB', 'MySQL', 'Oracle DB', 'Redis']
+            skills: ['MongoDB', 'MySQL', 'Oracle DB', 'PL/SQL', 'Liquibase']
         },
         {
             name: 'Cloud & DevOps',
@@ -101,7 +101,7 @@ export default function Resume(): React.JSX.Element {
         },
         {
             name: 'ML/AI',
-            skills: ['Scikit-learn', 'Pandas', 'NumPy', 'PyTorch', 'Neural Networks', 'Regression Analysis']
+            skills: ['Scikit-learn', 'Matplotlib', 'Seaborn', 'Pandas', 'NumPy', 'PyTorch', 'Neural Networks']
         }
     ];
 
@@ -111,11 +111,34 @@ export default function Resume(): React.JSX.Element {
                 {/* Header */}
                 <header className="text-center mb-12">
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Ashwin Athappan</h1>
-                    <p className="text-lg text-gray-600 dark:text-gray-300 mt-1">Software Developer</p>
+                    <p className="text-lg text-gray-600 dark:text-gray-300 mt-1">DevOps Engineer</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
                         ashwinathappank@gmail.com | Arlington, TX
                     </p>
                 </header>
+
+                {/* Skills */}
+                <section className="mb-12">
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 border-b-2 border-gray-900 dark:border-gray-200 pb-2">Skills</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {skills.map((item, index) => (
+                            <div key={index}
+                                 className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-4 rounded-lg shadow-sm">
+                                <h3 className="text-lg font-medium text-gray-900 dark:text-white">{item.name}</h3>
+                                <div className="flex flex-wrap gap-2 mt-1">
+                                    {item.skills.map((skill, idx) => (
+                                        <span
+                                            key={idx}
+                                            className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded"
+                                        >
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
 
                 {/* Experience */}
                 <section className="mb-12">
@@ -188,32 +211,9 @@ export default function Resume(): React.JSX.Element {
                     </div>
                 </section>
 
-
-                {/* Skills */}
-                <section className="mb-12">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 border-b-2 border-gray-900 dark:border-gray-200 pb-2">Skills</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {skills.map((item, index) => (
-                            <div key={index}
-                                 className="bg-white border-2 border-transparent dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-4 rounded-lg shadow-sm">
-                                <h3 className="text-lg font-medium text-gray-900 dark:text-white">{item.name}</h3>
-                                <div className="flex flex-wrap gap-2 mt-1">
-                                    {item.skills.map((skill, idx) => (
-                                        <span
-                                            key={idx}
-                                            className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded"
-                                        >
-                                            {skill}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
             </div>
             <div className="flex justify-center">
-                <Link href={'https://drive.google.com/file/d/13AKKoKK613lFA8PeJuoD_fMgsv02oXlW/view?usp=sharing'}
+                <Link href={'https://drive.google.com/file/d/1_CJJVMYZVwvBqvr-71nypVlekPJo-NZk/view?usp=sharing'}
                       target={'_blank'}
                       className="text-dark-element dark:text-white rounded-2xl bg-[#6CB4EE] dark:bg-[#00308F] px-6 py-2 transition-all duration-700 ease-in-out">
                     Download
