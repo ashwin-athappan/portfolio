@@ -1,47 +1,13 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Badge from "@/app/tools/components/Badge";
-
-import github_white from "@/public/assets/svg/github_white.svg";
-import github from "@/public/assets/svg/github.svg";
-import aws_white from "@/public/assets/svg/aws_white.svg";
-import aws from "@/public/assets/svg/aws.svg";
-
 import {certificates, toolsAndTechnologies, ide} from "@/app/tools/utils/data";
 import ToolsCard from "@/app/tools/components/ToolsCard";
-import {useTheme} from "next-themes";
-import {StaticImageData} from "next/image";
-
-interface toolsAndTechnologiesProps {
-    id: number;
-    name: string;
-    image: StaticImageData;
-    link: string;
-    description: string;
-}
+import {useThemeImages} from "@/lib/hooks/useThemeImages";
 
 export default function ToolsSection(): React.JSX.Element {
-
-    const {theme} = useTheme();
-
-    const [languages, setLanguages] = useState<toolsAndTechnologiesProps[]>(toolsAndTechnologies);
-
-    useEffect(() => {
-        const modifiedArray = toolsAndTechnologies.map((item) => {
-            if (item.name === 'GitHub' && theme === 'dark') {
-                item.image = github_white;
-            } else if (item.name === 'GitHub' && theme === 'light') {
-                item.image = github;
-            } else if (item.name === 'AWS' && theme === 'dark') {
-                item.image = aws_white;
-            } else if (item.name === 'AWS' && theme === 'light') {
-                item.image = aws;
-            }
-            return item;
-        });
-        setLanguages(modifiedArray);
-    }, [theme]);
+    const languages = useThemeImages(toolsAndTechnologies);
 
     return (
         <div className="p-4 mt-5">

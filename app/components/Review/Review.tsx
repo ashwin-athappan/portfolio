@@ -1,79 +1,24 @@
 "use client";
 
-import React, {ChangeEvent, useEffect} from "react";
-import axios from "axios";
-import Image, {StaticImageData} from "next/image";
-
-import blank_user_black from "@/public/assets/svg/user_black.svg";
-import blank_user_white from "@/public/assets/svg/user_white.svg";
-import {useTheme} from "next-themes";
-
-import {DEFAULT_USER_IMAGE_STRING, DEFAULT_USER_IMAGE_STRING_TYPE} from "@/lib/constants";
+import React from "react";
+import Image from "next/image";
+import {useReviewForm} from "@/lib/hooks/useReviewForm";
 
 const Review = (): React.JSX.Element => {
-
-    const {theme} = useTheme();
-
-    const [filename, setFilename] = React.useState<string | DEFAULT_USER_IMAGE_STRING_TYPE>(DEFAULT_USER_IMAGE_STRING);
-    const [previewImage, setPreviewImage] = React.useState<string | StaticImageData>(blank_user_black);
-    const [imageData, setImageData] = React.useState<string | ArrayBuffer | null>(null);
-
-    const relations = ['Friend', 'Family', 'Colleague', 'Mentor', 'Other'];
-
-    const [nameField, setNameField] = React.useState<string>('');
-    const [relationField, setRelationField] = React.useState<string>(relations[relations.length - 1]);
-    const [commentField, setCommentField] = React.useState<string>('');
-
-    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files ? e.target.files[0] : null;
-
-        if (file) {
-            setFilename(file.name);
-            const reader = new FileReader();
-
-            reader.onloadend = () => {
-                setImageData(reader.result);
-                setPreviewImage(reader.result as string);
-            };
-
-            reader.readAsDataURL(file);
-        } else {
-            setFilename(DEFAULT_USER_IMAGE_STRING);
-            if (theme === 'dark') {
-                setPreviewImage(blank_user_white);
-            } else {
-                setPreviewImage(blank_user_black);
-            }
-        }
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post("/api/testimonials", {
-                name: 'Name',
-                relation: 'FRIEND',
-                comment: 'Comment',
-                image: {
-                    name: filename,
-                    data: imageData,
-                },
-            });
-            console.log(response.data);
-        } catch (NextServerError) {
-            console.error("Failed to submit review:", NextServerError);
-        }
-
-    };
-
-    useEffect(() => {
-        if (theme === 'dark') {
-            setPreviewImage(blank_user_white);
-        } else {
-            setPreviewImage(blank_user_black);
-        }
-    }, [theme]);
+    const {
+        filename,
+        previewImage,
+        imageData,
+        nameField,
+        relationField,
+        commentField,
+        relations,
+        setNameField,
+        setRelationField,
+        setCommentField,
+        handleFileChange,
+        handleSubmit,
+    } = useReviewForm();
 
     return (
         <div
@@ -101,7 +46,7 @@ const Review = (): React.JSX.Element => {
                         <select
                             id="relation"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            defaultValue={relationField}
+                            value={relationField}
                             onChange={(e) => setRelationField(e.target.value)}
                         >
                             {relations.map((relation, index) => (

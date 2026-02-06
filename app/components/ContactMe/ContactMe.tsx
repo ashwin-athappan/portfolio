@@ -1,85 +1,22 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Copy, Check} from "lucide-react";
-import axios from "axios";
-
-interface ErrorType {
-    email?: string;
-    message?: string;
-}
+import {useContactForm} from "@/lib/hooks/useContactForm";
+import {useClipboard} from "@/lib/hooks/useClipboard";
 
 const ContactMe = (): React.JSX.Element => {
-    const [copied, setCopied] = useState(false);
     const email = "ashwinathappank@gmail.com";
-
-    const [contactEmail, setContactEmail] = useState<string>("");
-    const [message, setMessage] = useState<string>("");
-
-    const [errors, setErrors] = useState<ErrorType>({});
-    const [success, setSuccess] = useState<boolean>(false);
-
-    const [inputClass, setInputClass] = useState<string>("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500");
-
-    const copyToClipboard = async () => {
-        try {
-            await navigator.clipboard.writeText(email);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
-        } catch (err) {
-            console.error("Failed to copy text:", err);
-        }
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (!contactEmail || contactEmail === '') {
-            setErrors({
-                ...errors,
-                email: "Please enter an email"
-            })
-            return;
-        }
-
-        if (!message || message === '') {
-            setErrors({
-                ...errors,
-                message: "Please enter a message"
-            });
-            return;
-        }
-
-        const data = {
-            email: contactEmail.trim(),
-            message: message.trim(),
-        }
-
-        try {
-            const response = await axios.post("/api/contact", data);
-            if (response.status === 201) {
-                setSuccess(true);
-                setErrors({});
-                setContactEmail("");
-                setMessage("");
-            }
-        } catch (NextServerError) {
-            console.error("Failed to submit review:", NextServerError);
-        }
-
-    };
-
-    useEffect(() => {
-        if (errors.email || errors.message) {
-            setInputClass("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500");
-        }
-    }, [errors]);
-
-    useEffect(() => {
-        if (success) {
-            setInputClass("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-500 dark:focus:border-green-500");
-        }
-    }, [success]);
+    const {copied, copyToClipboard} = useClipboard();
+    const {
+        contactEmail,
+        message,
+        errors,
+        inputClass,
+        setContactEmail,
+        setMessage,
+        handleSubmit,
+    } = useContactForm();
 
     return (
         <div
@@ -97,7 +34,7 @@ const ContactMe = (): React.JSX.Element => {
 
                 {/* Copy Button */}
                 <button
-                    onClick={copyToClipboard}
+                    onClick={() => copyToClipboard(email)}
                     className="ml-4 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
                 >
                     {copied ? <Check color="green"/> : <Copy/>}

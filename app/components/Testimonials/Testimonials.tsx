@@ -1,90 +1,27 @@
 "use client";
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './Testimonials.module.css';
-import axios from "axios";
 import Image from "next/image";
-
+import { useTestimonials } from "@/lib/hooks/useTestimonials";
+import { mockTestimonials } from "@/lib/data/testimonials";
 import blank_user_black from "@/public/assets/svg/user_black.svg";
-// import {useTheme} from "next-themes";
-
-interface TestimonialRelation {
-    FRIEND: "Friend";
-    FAMILY: "Family";
-    COLLEAGUE: "Colleague";
-    OTHER: "Other";
-}
-
-interface TestimonialProps {
-    _id: number;
-    name: string;
-    comment: string;
-    image: string; // New field for profile image
-    relation?: keyof TestimonialRelation;
-}
+import { Testimony } from "@/lib/types/Testimony";
 
 const Testimonials = (): React.JSX.Element => {
+    const { testimonials: fetchedTestimonials, isLoading, error } = useTestimonials();
 
-    // const {theme} = useTheme();
+    // Use fetched testimonials if available, otherwise fall back to mock data
+    const testimonials: Testimony[] = fetchedTestimonials.length > 0
+        ? fetchedTestimonials
+        : mockTestimonials.map(t => ({
+            ...t,
+            imageUrl: t.imageUrl || blank_user_black,
+        }));
 
-    const testimonials: TestimonialProps[] = [
-        {
-            _id: 1,
-            name: 'John Doe',
-            comment: 'This is an amazing product! Highly recommended.',
-            image: blank_user_black,
-            relation: "FRIEND",
-        },
-        {
-            _id: 2,
-            name: 'Jane Smith',
-            comment: 'Great service and excellent support.',
-            image: blank_user_black,
-            relation: "FAMILY",
-        },
-        {
-            _id: 3,
-            name: 'Alice Johnson',
-            comment: 'The best experience I’ve ever had.',
-            image: blank_user_black,
-            relation: "COLLEAGUE",
-        },
-        {
-            _id: 4,
-            name: 'Bob Brown',
-            comment: 'Absolutely love it! Will buy again.',
-            image: blank_user_black,
-            relation: "OTHER",
-        },
-        {
-            _id: 5,
-            name: 'Charlie Davis',
-            comment: 'Top-notch quality and service.',
-            image: blank_user_black,
-            relation: "FRIEND",
-        },
-        {
-            _id: 6,
-            name: 'Eve White',
-            comment: 'Exceeded my expectations!',
-            image: blank_user_black,
-            relation: "COLLEAGUE",
-        },
-    ];
-
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            axios.get('/api/testimonials')
-                .then((response) => {
-                    console.log('Testimonials:', response.data.testimonies);
-                })
-                .catch((error) => {
-                    console.error('Failed to fetch testimonials:', error);
-                });
-        }, 3000000); // 50 minutes
-
-        return () => clearInterval(intervalId);
-    }, []);
+    const getImageUrl = (testimonial: Testimony): string => {
+        return testimonial.imageUrl || blank_user_black;
+    };
 
     return (
         <div className="max-w-full flex space-y-8">
@@ -92,14 +29,6 @@ const Testimonials = (): React.JSX.Element => {
                 <div
                     key={row}
                     className="relative mx-5 overflow-hidden"
-                    // onMouseEnter={(e) => {
-                    //     const container = e.currentTarget.querySelector('#animate_scroll');
-                    //     if (container) container.style.animationPlayState = 'paused';
-                    // }}
-                    // onMouseLeave={(e) => {
-                    //     const container = e.currentTarget.querySelector('#animate_scroll');
-                    //     if (container) container.style.animationPlayState = 'running';
-                    // }}
                 >
                     <div id="animate_scroll" className={`flex ${styles.animate_scroll}`}>
                         {[...testimonials, ...testimonials].map((testimonial, index) => (
@@ -109,7 +38,7 @@ const Testimonials = (): React.JSX.Element => {
                             >
                                 <hr/>
                                 <Image
-                                    src={testimonial.image}
+                                    src={getImageUrl(testimonial)}
                                     alt={testimonial.name}
                                     height={50}
                                     width={50}
@@ -132,6 +61,7 @@ const Testimonials = (): React.JSX.Element => {
                     </div>
                 </div>
             ))}
+            {error && <div className="text-red-500 text-center">{error}</div>}
         </div>
     );
 };

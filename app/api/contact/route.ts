@@ -1,24 +1,33 @@
 "use server";
 
-import {NextResponse} from "next/server";
-import {connect} from "@/lib/db";
-import Contact from "@/models/Contact";
+import { NextResponse } from "next/server";
+import { connect } from "@/lib/db";
+import { ServiceFactory } from "@/lib/factories/ServiceFactory";
 
 export async function POST(request: Request): Promise<NextResponse> {
     try {
-        const {email, message} = await request.json();
-        console.log("Email:", email);
-        console.log("Message:", message);
+        const { email, message } = await request.json();
 
-        const {client} = await connect();
+        await connect();
 
-        const contactObj = new Contact({email, message, date: new Date()});
-        await contactObj.save();
+        const contactService = ServiceFactory.getContactService();
+        await contactService.submitContactForm({ email, message });
 
-        client?.close();
-        return NextResponse.json({message: "Message sent successfully"}, {status: 201});
+        return NextResponse.json({ message: "Message sent successfully" }, { status: 201 });
     } catch (err) {
         console.error("Failed to send message:", err);
-        return NextResponse.json({message: "Failed to send message"}, {status: 500});
+
+        // Check if it's a validation error
+        let errorMessage = "Failed to send message";
+        try {
+            const parsedError = JSON.parse((err as Error).message);
+            if (typeof parsedError === 'object') {
+                return NextResponse.json({ errors: parsedError }, { status: 400 });
+            }
+        } catch {
+            // Not a validation error, use default message
+        }
+
+        return NextResponse.json({ message: errorMessage }, { status: 500 });
     }
 }
