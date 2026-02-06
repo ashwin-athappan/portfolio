@@ -56,7 +56,7 @@ const Header = (): React.JSX.Element => {
         <nav className="bg-transparent backdrop-filter backdrop-blur-sm fixed w-full z-40 top-0">
             <div className="max-w-screen-xl flex justify-between items-center mx-auto p-4">
                 <h2 className="font-bold text-sky-800 text-[25px] lg:text-[20px]">
-                    <Link href="/">Ashwin</Link>
+                    <Link className="text-4xl" href="/">Ashwin</Link>
                 </h2>
                 <div className="items-center bg-nav justify-between flex w-auto" id="navbar-sticky">
                     <div
