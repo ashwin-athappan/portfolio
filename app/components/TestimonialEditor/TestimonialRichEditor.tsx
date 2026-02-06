@@ -5,6 +5,7 @@ import React, {
     useEffect,
     useCallback,
     useId,
+    useState,
 } from "react";
 import { EditorToolbar } from "./EditorToolbar";
 import { EmojiPicker } from "./EmojiPicker";
@@ -29,6 +30,31 @@ export function TestimonialRichEditor({
     const editorRef = useRef<HTMLDivElement>(null);
     const isInternalChange = useRef(false);
     const id = useId();
+    const [activeBold, setActiveBold] = useState(false);
+    const [activeItalic, setActiveItalic] = useState(false);
+
+    const updateFormatState = useCallback(() => {
+        const el = editorRef.current;
+        if (!el || typeof document === "undefined") return;
+        const selection = window.getSelection();
+        if (!selection || selection.rangeCount === 0 || !selection.anchorNode || !el.contains(selection.anchorNode)) {
+            setActiveBold(false);
+            setActiveItalic(false);
+            return;
+        }
+        try {
+            setActiveBold(document.queryCommandState("bold"));
+            setActiveItalic(document.queryCommandState("italic"));
+        } catch {
+            setActiveBold(false);
+            setActiveItalic(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        document.addEventListener("selectionchange", updateFormatState);
+        return () => document.removeEventListener("selectionchange", updateFormatState);
+    }, [updateFormatState]);
 
     const emitChange = useCallback(() => {
         const el = editorRef.current;
@@ -56,14 +82,20 @@ export function TestimonialRichEditor({
     const handleBold = useCallback(() => {
         editorRef.current?.focus();
         document.execCommand("bold", false);
+        updateFormatState();
         emitChange();
-    }, [emitChange]);
+    }, [emitChange, updateFormatState]);
+
+    const handleItalic = useCallback(() => {
+        editorRef.current?.focus();
+        document.execCommand("italic", false);
+        updateFormatState();
+        emitChange();
+    }, [emitChange, updateFormatState]);
 
     const insertEmoji = useCallback(
         (emoji: string) => {
-            const el = editorRef.current;
-            if (!el) return;
-            el.focus();
+            editorRef.current?.focus();
             document.execCommand("insertText", false, emoji);
             emitChange();
         },
@@ -75,7 +107,12 @@ export function TestimonialRichEditor({
             className={`overflow-hidden rounded-lg border border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-700 ${className}`}
         >
             <div className="flex items-center justify-between border-b border-gray-300 dark:border-gray-600">
-                <EditorToolbar onBold={handleBold} />
+                <EditorToolbar
+                    onBold={handleBold}
+                    onItalic={handleItalic}
+                    activeBold={activeBold}
+                    activeItalic={activeItalic}
+                />
                 <EmojiPicker onSelect={insertEmoji} />
             </div>
             <div
@@ -88,6 +125,9 @@ export function TestimonialRichEditor({
                 id={id}
                 className="min-h-[150px] max-h-[200px] overflow-y-auto p-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none dark:text-white dark:placeholder-gray-400 [&:empty::before]:content-[attr(data-placeholder)] [&:empty::before]:text-gray-400"
                 onInput={emitChange}
+                onFocus={updateFormatState}
+                onKeyUp={updateFormatState}
+                onMouseUp={updateFormatState}
                 onPaste={(e) => {
                     e.preventDefault();
                     const text = e.clipboardData.getData("text/plain");
