@@ -77,14 +77,21 @@ export function useTestimonialForm(): UseTestimonialFormReturn {
         }
     };
 
+    const hasCommentText = (html: string) =>
+        html.replace(/<[^>]+>/g, "").trim().length > 0;
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(null);
+        if (!hasCommentText(comment)) {
+            setError("Please enter your testimony.");
+            return;
+        }
         try {
             await httpClient.post("/api/testimonials", {
                 name: name.trim(),
                 relation,
-                comment: comment.trim(),
+                comment,
                 whereWeFirstMet: whereWeFirstMet.trim(),
                 professionalRelation: professionalRelation.trim(),
                 image: {

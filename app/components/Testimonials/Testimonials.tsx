@@ -1,12 +1,14 @@
 "use client";
 
 import React from 'react';
+import Link from "next/link";
 import styles from './Testimonials.module.css';
 import Image from "next/image";
 import { useTestimonials } from "@/lib/hooks/useTestimonials";
 import { mockTestimonials } from "@/lib/data/testimonials";
 import blank_user_black from "@/public/assets/svg/user_black.svg";
 import { Testimony } from "@/lib/types/Testimony";
+import { TestimonialContent } from "./TestimonialContent";
 
 const Testimonials = (): React.JSX.Element => {
     const { testimonials: fetchedTestimonials, isLoading, error } = useTestimonials();
@@ -19,12 +21,19 @@ const Testimonials = (): React.JSX.Element => {
             imageUrl: t.imageUrl || blank_user_black,
         }));
 
-    const getImageUrl = (testimonial: Testimony): string => {
-        console.log("Image URL = " + testimonial.imageUrl);
-        return testimonial.imageUrl || blank_user_black;
-    };
+    const getImageUrl = (testimonial: Testimony): string =>
+        testimonial.imageUrl || blank_user_black;
 
     return (
+        <div className="max-w-full flex flex-col space-y-6">
+            <div className="flex justify-center px-4">
+                <Link
+                    href="/testimonial"
+                    className="rounded-lg bg-blue-500 px-5 py-2.5 font-semibold text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700"
+                >
+                    Give testimony
+                </Link>
+            </div>
         <div className="max-w-full flex space-y-8">
             {[1, 2].map((row) => (
                 <div
@@ -47,7 +56,7 @@ const Testimonials = (): React.JSX.Element => {
                                 />
                                 <hr/>
                                 <h3 className="font-bold text-center">{testimonial.name}</h3>
-                                <p className="text-justify">{testimonial.comment}</p>
+                                <TestimonialContent html={testimonial.comment ?? ""} />
                                 <hr/>
                                 <div className="w-full flex justify-center">
                                     {testimonial.relation && (
@@ -63,6 +72,7 @@ const Testimonials = (): React.JSX.Element => {
                 </div>
             ))}
             {error && <div className="text-red-500 text-center">{error}</div>}
+        </div>
         </div>
     );
 };

@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTestimonialForm } from "@/lib/hooks/useTestimonialForm";
+import { TestimonialRichEditor } from "@/app/components/TestimonialEditor/TestimonialRichEditor";
 
 const inputClass =
     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
@@ -138,19 +139,17 @@ export default function TestimonialPage() {
                         />
                     </div>
 
-                    {/* Comment */}
+                    {/* Comment (rich: bold + emojis, stored as HTML) */}
                     <div className="mb-5">
-                        <label htmlFor="comment" className={labelClass}>
+                        <label htmlFor="testimonial-editor" className={labelClass}>
                             What do you think?
                         </label>
-                        <textarea
-                            id="comment"
+                        <TestimonialRichEditor
                             value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            className={inputClass}
+                            onChange={setComment}
                             placeholder="Your testimony or message"
-                            rows={4}
                             required
+                            aria-label="What do you think?"
                         />
                     </div>
 
