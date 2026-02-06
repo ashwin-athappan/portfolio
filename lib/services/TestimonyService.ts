@@ -31,6 +31,8 @@ export class TestimonyService implements ITestimonyService {
             relation: data.relation,
             comment: data.comment.trim(),
             imageUrl,
+            whereWeFirstMet: data.whereWeFirstMet.trim(),
+            professionalRelation: data.professionalRelation.trim(),
         });
     }
 

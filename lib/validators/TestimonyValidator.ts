@@ -17,6 +17,14 @@ export class TestimonyValidator implements IValidator<TestimonyRequest> {
             errors.comment = "Comment is required";
         }
 
+        if (!data.whereWeFirstMet || data.whereWeFirstMet.trim() === '') {
+            errors.whereWeFirstMet = "Where we first met is required";
+        }
+
+        if (!data.professionalRelation || data.professionalRelation.trim() === '') {
+            errors.professionalRelation = "Professional relation is required";
+        }
+
         return {
             isValid: Object.keys(errors).length === 0,
             errors,

@@ -7,10 +7,10 @@ import { ServiceFactory } from "@/lib/factories/ServiceFactory";
 export async function POST(request: Request): Promise<NextResponse> {
     try {
         const { bucket } = await connect();
-        const { name, relation, comment, image } = await request.json();
+        const { name, relation, comment, whereWeFirstMet, professionalRelation, image } = await request.json();
 
         const testimonyService = ServiceFactory.getTestimonyService(bucket || undefined);
-        await testimonyService.createTestimony({ name, relation, comment, image });
+        await testimonyService.createTestimony({ name, relation, comment, whereWeFirstMet, professionalRelation, image });
 
         return NextResponse.json({ message: "Testimony added successfully" }, { status: 201 });
     } catch (err) {

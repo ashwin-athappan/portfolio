@@ -20,6 +20,7 @@ const Testimonials = (): React.JSX.Element => {
         }));
 
     const getImageUrl = (testimonial: Testimony): string => {
+        console.log("Image URL = " + testimonial.imageUrl);
         return testimonial.imageUrl || blank_user_black;
     };
 

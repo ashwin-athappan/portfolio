@@ -9,6 +9,8 @@ export class TestimonyRepository implements ITestimonyRepository {
             relation: testimony.relation,
             comment: testimony.comment,
             imageUrl: testimony.imageUrl,
+            whereWeFirstMet: testimony.whereWeFirstMet,
+            professionalRelation: testimony.professionalRelation,
         });
         const saved = await testimonyObj.save();
         return {
@@ -17,6 +19,8 @@ export class TestimonyRepository implements ITestimonyRepository {
             relation: saved.relation,
             comment: saved.comment,
             imageUrl: saved.imageUrl,
+            whereWeFirstMet: saved.whereWeFirstMet,
+            professionalRelation: saved.professionalRelation,
         };
     }
 
@@ -28,6 +32,8 @@ export class TestimonyRepository implements ITestimonyRepository {
             relation: t.relation,
             comment: t.comment,
             imageUrl: t.imageUrl,
+            whereWeFirstMet: t.whereWeFirstMet,
+            professionalRelation: t.professionalRelation,
         }));
     }
 }

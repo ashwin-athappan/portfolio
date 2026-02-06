@@ -8,6 +8,7 @@ import LinkedIn from "@/app/components/LinkedIn/LinkedIn";
 import YouTube from "@/app/components/YouTube/YouTube";
 import ContactMe from "@/app/components/ContactMe/ContactMe";
 import React from "react";
+import Testimonials from "@/app/components/Testimonials/Testimonials";
 
 export default function About() {
     return (
@@ -20,6 +21,9 @@ export default function About() {
                 <LinkedIn />
                 <YouTube />
                 <ContactMe />
+            </div>
+            <div className="container mt-5 mx-auto p-4 px-10 xl:px-32 pb-20 content">
+                <Testimonials />
             </div>
         </div>
     );
