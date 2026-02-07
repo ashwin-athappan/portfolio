@@ -4,6 +4,7 @@ import { ITestimonyRepository } from "@/lib/interfaces/ITestimonyRepository";
 import { TestimonyValidator } from "@/lib/validators/TestimonyValidator";
 import { TestimonyRequest, Testimony, TestimonyStatus } from "@/lib/types/Testimony";
 import { DEFAULT_USER_IMAGE_STRING } from "@/lib/constants";
+import { testimonialsCache } from "@/lib/cache/testimonialsCache";
 
 export class TestimonyService implements ITestimonyService {
     constructor(
@@ -30,7 +31,7 @@ export class TestimonyService implements ITestimonyService {
             }
         }
 
-        return await this.testimonyRepository.create({
+        const created = await this.testimonyRepository.create({
             name: data.name.trim(),
             relation: data.relation,
             comment: data.comment.trim(),
@@ -40,10 +41,16 @@ export class TestimonyService implements ITestimonyService {
             professionalRelation: data.professionalRelation.trim(),
             status: "pending",
         });
+        testimonialsCache.invalidate();
+        return created;
     }
 
     async getAllTestimonies(): Promise<Testimony[]> {
-        return await this.testimonyRepository.findAllByStatus("approved");
+        const cached = testimonialsCache.getCached();
+        if (cached !== null) return cached;
+        const list = await this.testimonyRepository.findAllByStatus("approved");
+        testimonialsCache.setCached(list);
+        return list;
     }
 
     async getTestimoniesByStatus(status?: TestimonyStatus): Promise<Testimony[]> {
@@ -51,7 +58,9 @@ export class TestimonyService implements ITestimonyService {
     }
 
     async updateTestimonyStatus(id: string, status: TestimonyStatus): Promise<Testimony | null> {
-        return await this.testimonyRepository.updateStatus(id, status);
+        const updated = await this.testimonyRepository.updateStatus(id, status);
+        if (updated) testimonialsCache.invalidate();
+        return updated;
     }
 
     async deleteTestimony(id: string): Promise<boolean> {
@@ -68,6 +77,8 @@ export class TestimonyService implements ITestimonyService {
             }
         }
 
-        return await this.testimonyRepository.deleteById(id);
+        const deleted = await this.testimonyRepository.deleteById(id);
+        if (deleted) testimonialsCache.invalidate();
+        return deleted;
     }
 }
