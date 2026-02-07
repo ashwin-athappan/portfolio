@@ -25,7 +25,7 @@ export default async function RootLayout({
 
     return (
         <html lang="en" className={theme} suppressHydrationWarning>
-        <body className={`bg-light-background dark:bg-dark-background`}>
+        <body className={`bg-light-background dark:bg-dark-background`} suppressHydrationWarning>
         <NextThemeProvider>
             <div className="pt-20">
                 <Header/>

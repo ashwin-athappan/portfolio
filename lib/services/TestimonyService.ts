@@ -1,7 +1,7 @@
 import { ITestimonyService } from "@/lib/interfaces/ITestimonyService";
 import { ITestimonyRepository } from "@/lib/interfaces/ITestimonyRepository";
 import { TestimonyValidator } from "@/lib/validators/TestimonyValidator";
-import { TestimonyRequest, Testimony } from "@/lib/types/Testimony";
+import { TestimonyRequest, Testimony, TestimonyStatus } from "@/lib/types/Testimony";
 import { DEFAULT_USER_IMAGE_STRING } from "@/lib/constants";
 import { Readable } from "stream";
 import mongoose from "mongoose";
@@ -33,11 +33,20 @@ export class TestimonyService implements ITestimonyService {
             imageUrl,
             whereWeFirstMet: data.whereWeFirstMet.trim(),
             professionalRelation: data.professionalRelation.trim(),
+            status: "pending",
         });
     }
 
     async getAllTestimonies(): Promise<Testimony[]> {
-        return await this.testimonyRepository.findAll();
+        return await this.testimonyRepository.findAllByStatus("approved");
+    }
+
+    async getTestimoniesByStatus(status?: TestimonyStatus): Promise<Testimony[]> {
+        return await this.testimonyRepository.findAllByStatus(status);
+    }
+
+    async updateTestimonyStatus(id: string, status: TestimonyStatus): Promise<Testimony | null> {
+        return await this.testimonyRepository.updateStatus(id, status);
     }
 
     private async uploadImage(image: { name: string; data: string }): Promise<string> {

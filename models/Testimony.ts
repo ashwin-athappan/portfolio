@@ -7,6 +7,7 @@ const TestimonySchema = new mongoose.Schema({
     imageUrl: { type: String, required: false, default: "default_user_image" },
     whereWeFirstMet: { type: String, required: true },
     professionalRelation: { type: String, required: true },
+    status: { type: String, enum: ['pending', 'approved', 'rejected'], required: true, default: 'pending' },
 });
 
 const Testimony = mongoose.models.Testimony || mongoose.model('Testimony', TestimonySchema);

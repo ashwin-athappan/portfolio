@@ -1,6 +1,20 @@
 import { ITestimonyRepository } from "@/lib/interfaces/ITestimonyRepository";
-import { Testimony } from "@/lib/types/Testimony";
+import { Testimony, TestimonyStatus } from "@/lib/types/Testimony";
 import TestimonyModel from "@/models/Testimony";
+import mongoose from "mongoose";
+
+function mapDocToTestimony(t: { _id: mongoose.Types.ObjectId; name: string; relation: string; comment: string; imageUrl?: string; whereWeFirstMet?: string; professionalRelation?: string; status?: string }): Testimony {
+    return {
+        _id: t._id.toString(),
+        name: t.name,
+        relation: t.relation as Testimony["relation"],
+        comment: t.comment,
+        imageUrl: t.imageUrl,
+        whereWeFirstMet: t.whereWeFirstMet,
+        professionalRelation: t.professionalRelation,
+        status: (t.status as TestimonyStatus) || "pending",
+    };
+}
 
 export class TestimonyRepository implements ITestimonyRepository {
     async create(testimony: Omit<Testimony, '_id'>): Promise<Testimony> {
@@ -11,29 +25,26 @@ export class TestimonyRepository implements ITestimonyRepository {
             imageUrl: testimony.imageUrl,
             whereWeFirstMet: testimony.whereWeFirstMet,
             professionalRelation: testimony.professionalRelation,
+            status: testimony.status ?? "pending",
         });
         const saved = await testimonyObj.save();
-        return {
-            _id: saved._id.toString(),
-            name: saved.name,
-            relation: saved.relation,
-            comment: saved.comment,
-            imageUrl: saved.imageUrl,
-            whereWeFirstMet: saved.whereWeFirstMet,
-            professionalRelation: saved.professionalRelation,
-        };
+        return mapDocToTestimony(saved);
     }
 
     async findAll(): Promise<Testimony[]> {
         const testimonies = await TestimonyModel.find();
-        return testimonies.map((t) => ({
-            _id: t._id.toString(),
-            name: t.name,
-            relation: t.relation,
-            comment: t.comment,
-            imageUrl: t.imageUrl,
-            whereWeFirstMet: t.whereWeFirstMet,
-            professionalRelation: t.professionalRelation,
-        }));
+        return testimonies.map(mapDocToTestimony);
+    }
+
+    async findAllByStatus(status?: TestimonyStatus): Promise<Testimony[]> {
+        const query = status ? { status } : {};
+        const testimonies = await TestimonyModel.find(query).sort({ _id: -1 });
+        return testimonies.map(mapDocToTestimony);
+    }
+
+    async updateStatus(id: string, status: TestimonyStatus): Promise<Testimony | null> {
+        if (!mongoose.Types.ObjectId.isValid(id)) return null;
+        const updated = await TestimonyModel.findByIdAndUpdate(id, { status }, { new: true });
+        return updated ? mapDocToTestimony(updated) : null;
     }
 }

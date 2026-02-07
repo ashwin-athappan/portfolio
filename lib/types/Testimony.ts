@@ -1,5 +1,7 @@
 export type TestimonyRelation = 'FRIEND' | 'FAMILY' | 'COLLEAGUE' | 'OTHER';
 
+export type TestimonyStatus = 'pending' | 'approved' | 'rejected';
+
 export interface Testimony {
     _id?: string;
     name: string;
@@ -8,6 +10,7 @@ export interface Testimony {
     imageUrl?: string;
     whereWeFirstMet?: string;
     professionalRelation?: string;
+    status?: TestimonyStatus;
 }
 
 export interface TestimonyRequest {

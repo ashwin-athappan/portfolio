@@ -21,8 +21,13 @@ const Testimonials = (): React.JSX.Element => {
             imageUrl: t.imageUrl || blank_user_black,
         }));
 
-    const getImageUrl = (testimonial: Testimony): string =>
-        testimonial.imageUrl || blank_user_black;
+    const getImageSrc = (testimonial: Testimony): string | typeof blank_user_black => {
+        const url = testimonial.imageUrl;
+        if (!url) return blank_user_black;
+        if (typeof url === "string" && (url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://")))
+            return url;
+        return blank_user_black;
+    };
 
     return (
         <div className="max-w-full flex flex-col space-y-6">
@@ -48,7 +53,7 @@ const Testimonials = (): React.JSX.Element => {
                             >
                                 <hr/>
                                 <Image
-                                    src={getImageUrl(testimonial)}
+                                    src={getImageSrc(testimonial)}
                                     alt={testimonial.name}
                                     height={50}
                                     width={50}
