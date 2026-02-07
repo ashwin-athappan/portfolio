@@ -11,6 +11,7 @@ export default function DashboardPage() {
     const [loginError, setLoginError] = useState("");
     const [loading, setLoading] = useState(true);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
+    const [deletingId, setDeletingId] = useState<string | null>(null);
 
     const fetchTestimonies = useCallback(async () => {
         const res = await fetch("/api/dashboard/testimonies");
@@ -90,6 +91,17 @@ export default function DashboardPage() {
             if (res.ok) await fetchTestimonies();
         } finally {
             setUpdatingId(null);
+        }
+    };
+
+    const handleDelete = async (id: string) => {
+        if (!window.confirm("Delete this testimony? The image will be removed from storage as well.")) return;
+        setDeletingId(id);
+        try {
+            const res = await fetch(`/api/dashboard/testimonies/${id}`, { method: "DELETE" });
+            if (res.ok) await fetchTestimonies();
+        } finally {
+            setDeletingId(null);
         }
     };
 
@@ -200,7 +212,7 @@ export default function DashboardPage() {
                                 <div className="mb-3 text-sm text-gray-700 dark:text-gray-300">
                                     <TestimonialContent html={t.comment ?? ""} />
                                 </div>
-                                <div className="flex flex-wrap gap-2">
+                                <div className="flex flex-wrap items-center gap-2">
                                     <button
                                         type="button"
                                         disabled={updatingId === t._id || (t.status ?? "pending") === "pending"}
@@ -224,6 +236,14 @@ export default function DashboardPage() {
                                         className="rounded-lg border border-red-500 bg-red-50 px-3 py-1.5 text-sm font-medium text-red-800 hover:bg-red-100 disabled:opacity-50 disabled:cursor-default dark:border-red-600 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30"
                                     >
                                         Reject
+                                    </button>
+                                    <button
+                                        type="button"
+                                        disabled={deletingId === t._id}
+                                        onClick={() => t._id && handleDelete(t._id)}
+                                        className="ml-auto rounded-lg border border-gray-400 bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-default dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                                    >
+                                        {deletingId === t._id ? "Deleting…" : "Delete"}
                                     </button>
                                 </div>
                             </li>

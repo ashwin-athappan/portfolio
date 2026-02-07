@@ -1,3 +1,4 @@
+import { del } from "@vercel/blob";
 import { ITestimonyService } from "@/lib/interfaces/ITestimonyService";
 import { ITestimonyRepository } from "@/lib/interfaces/ITestimonyRepository";
 import { TestimonyValidator } from "@/lib/validators/TestimonyValidator";
@@ -51,5 +52,22 @@ export class TestimonyService implements ITestimonyService {
 
     async updateTestimonyStatus(id: string, status: TestimonyStatus): Promise<Testimony | null> {
         return await this.testimonyRepository.updateStatus(id, status);
+    }
+
+    async deleteTestimony(id: string): Promise<boolean> {
+        const testimony = await this.testimonyRepository.findById(id);
+        if (!testimony) return false;
+
+        const imageUrl = testimony.imageUrl;
+        if (imageUrl && typeof imageUrl === "string" && imageUrl.includes("blob.vercel-storage.com")) {
+            try {
+                await del(imageUrl);
+            } catch (err) {
+                console.error("Failed to delete blob image:", err);
+                // Continue to delete the record even if blob delete fails (e.g. already deleted)
+            }
+        }
+
+        return await this.testimonyRepository.deleteById(id);
     }
 }

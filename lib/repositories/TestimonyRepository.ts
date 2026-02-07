@@ -44,9 +44,21 @@ export class TestimonyRepository implements ITestimonyRepository {
         return testimonies.map(mapDocToTestimony);
     }
 
+    async findById(id: string): Promise<Testimony | null> {
+        if (!mongoose.Types.ObjectId.isValid(id)) return null;
+        const doc = await TestimonyModel.findById(id);
+        return doc ? mapDocToTestimony(doc) : null;
+    }
+
     async updateStatus(id: string, status: TestimonyStatus): Promise<Testimony | null> {
         if (!mongoose.Types.ObjectId.isValid(id)) return null;
         const updated = await TestimonyModel.findByIdAndUpdate(id, { status }, { new: true });
         return updated ? mapDocToTestimony(updated) : null;
+    }
+
+    async deleteById(id: string): Promise<boolean> {
+        if (!mongoose.Types.ObjectId.isValid(id)) return false;
+        const result = await TestimonyModel.findByIdAndDelete(id);
+        return result != null;
     }
 }

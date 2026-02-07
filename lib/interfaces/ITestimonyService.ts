@@ -5,4 +5,5 @@ export interface ITestimonyService {
     getAllTestimonies(): Promise<Testimony[]>;
     getTestimoniesByStatus(status?: TestimonyStatus): Promise<Testimony[]>;
     updateTestimonyStatus(id: string, status: TestimonyStatus): Promise<Testimony | null>;
+    deleteTestimony(id: string): Promise<boolean>;
 }
