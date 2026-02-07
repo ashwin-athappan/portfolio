@@ -63,7 +63,11 @@ export default function TestimonialPage() {
                     Help others get to know me by sharing how we connected.
                 </p>
 
-                <form className="mx-auto max-w-sm" onSubmit={handleSubmit}>
+                <form
+                    className="mx-auto max-w-sm"
+                    onSubmit={handleSubmit}
+                    encType="multipart/form-data"
+                >
                     {/* 1. Where did we first meet? */}
                     <div className="mb-5">
                         <label htmlFor="whereWeFirstMet" className={labelClass}>
@@ -173,6 +177,7 @@ export default function TestimonialPage() {
                             type="file"
                             accept="image/*"
                             id="image"
+                            name="image"
                             className={inputClass}
                             onChange={handleFileChange}
                         />

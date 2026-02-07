@@ -4,7 +4,9 @@ const TestimonySchema = new mongoose.Schema({
     name: { type: String, required: true },
     relation: { type: String, enum: ['FRIEND', 'FAMILY', 'COLLEAGUE', 'OTHER'], required: true, default: 'OTHER' },
     comment: { type: String, required: true },
-    imageUrl: { type: String, required: false, default: "default_user_image" },
+    // Public URL when using external storage (e.g. Vercel Blob)
+    imageUrl: { type: String, required: false },
+    imageData: { type: String, required: false },
     whereWeFirstMet: { type: String, required: true },
     professionalRelation: { type: String, required: true },
     status: { type: String, enum: ['pending', 'approved', 'rejected'], required: true, default: 'pending' },

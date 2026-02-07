@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import { StaticImageData } from "next/image";
-import { HttpClient } from "@/lib/clients/HttpClient";
 import {
     DEFAULT_USER_IMAGE_STRING,
     DEFAULT_USER_IMAGE_STRING_TYPE,
@@ -12,6 +11,7 @@ import blank_user_black from "@/public/assets/svg/user_black.svg";
 import blank_user_white from "@/public/assets/svg/user_white.svg";
 import { useTheme } from "next-themes";
 import { TestimonyRelation } from "@/lib/types/Testimony";
+import { addTestimony } from "@/app/actions/addTestimony";
 
 const RELATION_OPTIONS: TestimonyRelation[] = ["FRIEND", "COLLEAGUE"];
 
@@ -54,23 +54,26 @@ export function useTestimonialForm(): UseTestimonialFormReturn {
     const [imageData, setImageData] = useState<string | ArrayBuffer | null>(
         null
     );
+    const [imageFile, setImageFile] = useState<File | null>(null);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState<string | null>(null);
-
-    const httpClient = new HttpClient();
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] ?? null;
         if (file) {
             setFilename(file.name);
+            setImageFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
-                setImageData(reader.result);
-                setPreviewImage(reader.result as string);
+                const result = reader.result;
+                setImageData(result);
+                setPreviewImage((result as string) || blank_user_black);
             };
             reader.readAsDataURL(file);
         } else {
             setFilename(DEFAULT_USER_IMAGE_STRING);
+            setImageData(null);
+            setImageFile(null);
             setPreviewImage(
                 theme === "dark" ? blank_user_white : blank_user_black
             );
@@ -87,18 +90,17 @@ export function useTestimonialForm(): UseTestimonialFormReturn {
             setError("Please enter your testimony.");
             return;
         }
-        try {
-            await httpClient.post("/api/testimonials", {
-                name: name.trim(),
-                relation,
-                comment,
-                whereWeFirstMet: whereWeFirstMet.trim(),
-                professionalRelation: professionalRelation.trim(),
-                image: {
-                    name: filename,
-                    data: imageData,
-                },
-            });
+        const formData = new FormData();
+        formData.set("name", name.trim());
+        formData.set("comment", comment);
+        formData.set("relation", relation);
+        formData.set("whereWeFirstMet", whereWeFirstMet.trim());
+        formData.set("professionalRelation", professionalRelation.trim());
+        if (imageFile) {
+            formData.set("image", imageFile);
+        }
+        const result = await addTestimony(formData);
+        if (result.success) {
             setSubmitted(true);
             setName("");
             setComment("");
@@ -106,9 +108,9 @@ export function useTestimonialForm(): UseTestimonialFormReturn {
             setProfessionalRelation("");
             setFilename(DEFAULT_USER_IMAGE_STRING);
             setImageData(null);
-        } catch (err) {
-            console.error("Failed to submit testimony:", err);
-            setError("Failed to submit. Please check all fields and try again.");
+            setImageFile(null);
+        } else {
+            setError(result.error ?? "Failed to submit. Please try again.");
         }
     };
 

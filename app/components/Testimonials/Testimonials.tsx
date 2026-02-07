@@ -22,12 +22,17 @@ const Testimonials = (): React.JSX.Element => {
         }));
 
     const getImageSrc = (testimonial: Testimony): string | typeof blank_user_black => {
+        if (testimonial.imageData && typeof testimonial.imageData === "string" && testimonial.imageData.startsWith("data:"))
+            return testimonial.imageData;
         const url = testimonial.imageUrl;
-        if (!url) return blank_user_black;
-        if (typeof url === "string" && (url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://")))
+        if (!url || typeof url !== "string") return blank_user_black;
+        if (url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://"))
             return url;
         return blank_user_black;
     };
+
+    const isDataUrl = (src: string | typeof blank_user_black): src is string =>
+        typeof src === "string" && src.startsWith("data:");
 
     return (
         <div className="max-w-full flex flex-col space-y-6">
@@ -52,13 +57,26 @@ const Testimonials = (): React.JSX.Element => {
                                 className="flex flex-col w-64 p-4 my-5 bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border shadow-lg rounded-lg mx-2"
                             >
                                 <hr/>
-                                <Image
-                                    src={getImageSrc(testimonial)}
-                                    alt={testimonial.name}
-                                    height={50}
-                                    width={50}
-                                    className="w-16 h-16 rounded-full mx-auto mb-2"
-                                />
+                                {(() => {
+                                    const src = getImageSrc(testimonial);
+                                    return isDataUrl(src) ? (
+                                        <img
+                                            src={src}
+                                            alt={testimonial.name}
+                                            width={50}
+                                            height={50}
+                                            className="w-16 h-16 rounded-full mx-auto mb-2 object-cover"
+                                        />
+                                    ) : (
+                                        <Image
+                                            src={src}
+                                            alt={testimonial.name}
+                                            height={50}
+                                            width={50}
+                                            className="w-16 h-16 rounded-full mx-auto mb-2"
+                                        />
+                                    );
+                                })()}
                                 <hr/>
                                 <h3 className="font-bold text-center">{testimonial.name}</h3>
                                 <TestimonialContent html={testimonial.comment ?? ""} />

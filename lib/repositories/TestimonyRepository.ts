@@ -3,13 +3,14 @@ import { Testimony, TestimonyStatus } from "@/lib/types/Testimony";
 import TestimonyModel from "@/models/Testimony";
 import mongoose from "mongoose";
 
-function mapDocToTestimony(t: { _id: mongoose.Types.ObjectId; name: string; relation: string; comment: string; imageUrl?: string; whereWeFirstMet?: string; professionalRelation?: string; status?: string }): Testimony {
+function mapDocToTestimony(t: { _id: mongoose.Types.ObjectId; name: string; relation: string; comment: string; imageUrl?: string; imageData?: string; whereWeFirstMet?: string; professionalRelation?: string; status?: string }): Testimony {
     return {
         _id: t._id.toString(),
         name: t.name,
         relation: t.relation as Testimony["relation"],
         comment: t.comment,
         imageUrl: t.imageUrl,
+        imageData: t.imageData,
         whereWeFirstMet: t.whereWeFirstMet,
         professionalRelation: t.professionalRelation,
         status: (t.status as TestimonyStatus) || "pending",
@@ -23,6 +24,7 @@ export class TestimonyRepository implements ITestimonyRepository {
             relation: testimony.relation,
             comment: testimony.comment,
             imageUrl: testimony.imageUrl,
+            imageData: testimony.imageData,
             whereWeFirstMet: testimony.whereWeFirstMet,
             professionalRelation: testimony.professionalRelation,
             status: testimony.status ?? "pending",

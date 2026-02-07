@@ -4,7 +4,6 @@ import { ContactRepository } from "@/lib/repositories/ContactRepository";
 import { TestimonyRepository } from "@/lib/repositories/TestimonyRepository";
 import { ContactValidator } from "@/lib/validators/ContactValidator";
 import { TestimonyValidator } from "@/lib/validators/TestimonyValidator";
-import mongoose from "mongoose";
 
 export class ServiceFactory {
     private static contactRepository: ContactRepository | null = null;
@@ -22,13 +21,13 @@ export class ServiceFactory {
         return new ContactService(this.contactRepository, this.contactValidator);
     }
 
-    static getTestimonyService(bucket?: mongoose.mongo.GridFSBucket): TestimonyService {
+    static getTestimonyService(): TestimonyService {
         if (!this.testimonyRepository) {
             this.testimonyRepository = new TestimonyRepository();
         }
         if (!this.testimonyValidator) {
             this.testimonyValidator = new TestimonyValidator();
         }
-        return new TestimonyService(this.testimonyRepository, this.testimonyValidator, bucket);
+        return new TestimonyService(this.testimonyRepository, this.testimonyValidator);
     }
 }

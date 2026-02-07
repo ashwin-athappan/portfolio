@@ -3,14 +3,11 @@ import { ITestimonyRepository } from "@/lib/interfaces/ITestimonyRepository";
 import { TestimonyValidator } from "@/lib/validators/TestimonyValidator";
 import { TestimonyRequest, Testimony, TestimonyStatus } from "@/lib/types/Testimony";
 import { DEFAULT_USER_IMAGE_STRING } from "@/lib/constants";
-import { Readable } from "stream";
-import mongoose from "mongoose";
 
 export class TestimonyService implements ITestimonyService {
     constructor(
         private testimonyRepository: ITestimonyRepository,
-        private validator: TestimonyValidator = new TestimonyValidator(),
-        private gridFSBucket?: mongoose.mongo.GridFSBucket
+        private validator: TestimonyValidator = new TestimonyValidator()
     ) {}
 
     async createTestimony(data: TestimonyRequest): Promise<Testimony> {
@@ -20,10 +17,16 @@ export class TestimonyService implements ITestimonyService {
             throw new Error(JSON.stringify(validation.errors));
         }
 
-        let imageUrl: string | undefined;
+        let imageData: string | undefined;
+        let imageUrl: string | undefined = data.imageUrl;
 
-        if (data.image && data.image.name !== DEFAULT_USER_IMAGE_STRING && this.gridFSBucket) {
-            imageUrl = await this.uploadImage(data.image);
+        if (imageUrl) {
+            // Use provided public URL (e.g. Vercel Blob)
+        } else if (data.image && data.image.name !== DEFAULT_USER_IMAGE_STRING) {
+            const raw = data.image.data;
+            if (raw != null && typeof raw === "string") {
+                imageData = raw.startsWith("data:") ? raw : `data:image/jpeg;base64,${raw}`;
+            }
         }
 
         return await this.testimonyRepository.create({
@@ -31,6 +34,7 @@ export class TestimonyService implements ITestimonyService {
             relation: data.relation,
             comment: data.comment.trim(),
             imageUrl,
+            imageData,
             whereWeFirstMet: data.whereWeFirstMet.trim(),
             professionalRelation: data.professionalRelation.trim(),
             status: "pending",
@@ -47,31 +51,5 @@ export class TestimonyService implements ITestimonyService {
 
     async updateTestimonyStatus(id: string, status: TestimonyStatus): Promise<Testimony | null> {
         return await this.testimonyRepository.updateStatus(id, status);
-    }
-
-    private async uploadImage(image: { name: string; data: string }): Promise<string> {
-        if (!this.gridFSBucket) {
-            throw new Error("GridFS bucket is not available");
-        }
-
-        const imageName = `${image.name}-${Date.now()}`;
-        const buffer = Buffer.from(image.data);
-        const stream = Readable.from(buffer);
-
-        return new Promise((resolve, reject) => {
-            const uploadStream = this.gridFSBucket!.openUploadStream(imageName, {
-                metadata: { name: imageName },
-            });
-
-            stream.pipe(uploadStream);
-
-            uploadStream.on('finish', () => {
-                resolve(imageName);
-            });
-
-            uploadStream.on('error', (error) => {
-                reject(error);
-            });
-        });
     }
 }
