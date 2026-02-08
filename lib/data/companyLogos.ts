@@ -15,6 +15,7 @@ import tesla from "@/public/assets/svg/company/tesla.svg";
 import isn from "@/public/assets/svg/company/isn.png";
 import university_of_texas_at_arlington from "@/public/assets/svg/company/university_of_texas_at_arlington.svg";
 import hughes_systique_corporation from "@/public/assets/svg/company/hughes_systique_corporation.png";
+import hoc from "@/public/assets/svg/company/hoc.png";
 
 /**
  * Map company name (as in COMPANY_NAMES) → StaticImageData for logos in public/assets/svg/company.
@@ -36,4 +37,5 @@ export const companyLogos: Record<string, StaticImageData> = {
     "University of Texas at Arlington": university_of_texas_at_arlington,
     "Hughes Systique Corporation": hughes_systique_corporation,
     "ISN Software": isn,
+    HOC: hoc
 };

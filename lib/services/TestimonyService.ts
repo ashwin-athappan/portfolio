@@ -3,6 +3,7 @@ import { ITestimonyService } from "@/lib/interfaces/ITestimonyService";
 import { ITestimonyRepository } from "@/lib/interfaces/ITestimonyRepository";
 import { TestimonyValidator } from "@/lib/validators/TestimonyValidator";
 import { TestimonyRequest, Testimony, TestimonyStatus } from "@/lib/types/Testimony";
+import { TestimonyUpdateRequest } from "@/lib/types/Testimony";
 import { DEFAULT_USER_IMAGE_STRING } from "@/lib/constants";
 import { testimonialsCache } from "@/lib/cache/testimonialsCache";
 
@@ -61,6 +62,25 @@ export class TestimonyService implements ITestimonyService {
 
     async updateTestimonyStatus(id: string, status: TestimonyStatus): Promise<Testimony | null> {
         const updated = await this.testimonyRepository.updateStatus(id, status);
+        if (updated) testimonialsCache.invalidate();
+        return updated;
+    }
+
+    async updateTestimony(id: string, data: TestimonyUpdateRequest): Promise<Testimony | null> {
+        const validation = this.validator.validateUpdate(data);
+        if (!validation.isValid) {
+            throw new Error(JSON.stringify(validation.errors));
+        }
+        const update: TestimonyUpdateRequest = {};
+        if (data.name !== undefined) update.name = data.name.trim();
+        if (data.relation !== undefined) update.relation = data.relation;
+        if (data.comment !== undefined) update.comment = data.comment.trim();
+        if (data.whereWeFirstMet !== undefined) update.whereWeFirstMet = data.whereWeFirstMet.trim();
+        if (data.professionalRelation !== undefined) update.professionalRelation = data.professionalRelation.trim();
+        if (data.company !== undefined) update.company = data.company.trim() || undefined;
+        if (data.position !== undefined) update.position = data.position.trim() || undefined;
+        if (data.status !== undefined) update.status = data.status;
+        const updated = await this.testimonyRepository.update(id, update);
         if (updated) testimonialsCache.invalidate();
         return updated;
     }

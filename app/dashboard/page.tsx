@@ -1,8 +1,16 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { Testimony, TestimonyStatus } from "@/lib/types/Testimony";
+import { Testimony, TestimonyStatus, TestimonyRelation } from "@/lib/types/Testimony";
 import { TestimonialContent } from "@/app/components/Testimonials/TestimonialContent";
+import { TestimonialRichEditor } from "@/app/components/TestimonialEditor/TestimonialRichEditor";
+
+const RELATION_OPTIONS: TestimonyRelation[] = ["FRIEND", "FAMILY", "COLLEAGUE", "OTHER"];
+const STATUS_OPTIONS: TestimonyStatus[] = ["pending", "approved", "rejected"];
+
+const inputClass =
+    "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
+const labelClass = "block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300";
 
 export default function DashboardPage() {
     const [authenticated, setAuthenticated] = useState<boolean | null>(null);
@@ -12,6 +20,19 @@ export default function DashboardPage() {
     const [loading, setLoading] = useState(true);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
     const [deletingId, setDeletingId] = useState<string | null>(null);
+    const [editingTestimony, setEditingTestimony] = useState<Testimony | null>(null);
+    const [editForm, setEditForm] = useState<{
+        name: string;
+        relation: TestimonyRelation;
+        comment: string;
+        whereWeFirstMet: string;
+        professionalRelation: string;
+        company: string;
+        position: string;
+        status: TestimonyStatus;
+    } | null>(null);
+    const [editSaving, setEditSaving] = useState(false);
+    const [editError, setEditError] = useState<string | null>(null);
 
     const fetchTestimonies = useCallback(async () => {
         const res = await fetch("/api/dashboard/testimonies");
@@ -102,6 +123,59 @@ export default function DashboardPage() {
             if (res.ok) await fetchTestimonies();
         } finally {
             setDeletingId(null);
+        }
+    };
+
+    const openEdit = (t: Testimony) => {
+        setEditingTestimony(t);
+        setEditForm({
+            name: t.name ?? "",
+            relation: t.relation ?? "COLLEAGUE",
+            comment: t.comment ?? "",
+            whereWeFirstMet: t.whereWeFirstMet ?? "",
+            professionalRelation: t.professionalRelation ?? "",
+            company: t.company ?? "",
+            position: t.position ?? "",
+            status: (t.status as TestimonyStatus) ?? "pending",
+        });
+        setEditError(null);
+    };
+
+    const closeEdit = () => {
+        setEditingTestimony(null);
+        setEditForm(null);
+        setEditError(null);
+    };
+
+    const handleEditSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!editingTestimony?._id || !editForm) return;
+        setEditSaving(true);
+        setEditError(null);
+        try {
+            const res = await fetch(`/api/dashboard/testimonies/${editingTestimony._id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: editForm.name.trim(),
+                    relation: editForm.relation,
+                    comment: editForm.comment.trim(),
+                    whereWeFirstMet: editForm.whereWeFirstMet.trim(),
+                    professionalRelation: editForm.professionalRelation.trim(),
+                    company: editForm.company.trim() || undefined,
+                    position: editForm.position.trim() || undefined,
+                    status: editForm.status,
+                }),
+            });
+            const json = await res.json().catch(() => ({}));
+            if (!res.ok) {
+                setEditError(json.error || (json.errors ? JSON.stringify(json.errors) : "Failed to update"));
+                return;
+            }
+            closeEdit();
+            await fetchTestimonies();
+        } finally {
+            setEditSaving(false);
         }
     };
 
@@ -215,6 +289,13 @@ export default function DashboardPage() {
                                 <div className="flex flex-wrap items-center gap-2">
                                     <button
                                         type="button"
+                                        onClick={() => openEdit(t)}
+                                        className="rounded-lg border border-blue-500 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-800 hover:bg-blue-100 dark:border-blue-600 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        type="button"
                                         disabled={updatingId === t._id || (t.status ?? "pending") === "pending"}
                                         onClick={() => t._id && updateStatus(t._id, "pending")}
                                         className="rounded-lg border border-amber-500 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-100 disabled:opacity-50 disabled:cursor-default dark:border-amber-600 dark:bg-amber-900/20 dark:text-amber-400 dark:hover:bg-amber-900/30"
@@ -249,6 +330,146 @@ export default function DashboardPage() {
                             </li>
                         ))}
                     </ul>
+                )}
+
+                {editingTestimony && editForm && (
+                    <div
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="edit-testimony-title"
+                    >
+                        <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-800">
+                            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
+                                <h2 id="edit-testimony-title" className="text-lg font-semibold text-gray-900 dark:text-white">
+                                    Edit testimony
+                                </h2>
+                                <button
+                                    type="button"
+                                    onClick={closeEdit}
+                                    className="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                    aria-label="Close"
+                                >
+                                    ×
+                                </button>
+                            </div>
+                            <form onSubmit={handleEditSubmit} className="p-4 space-y-3">
+                                <div>
+                                    <label htmlFor="edit-name" className={labelClass}>Name</label>
+                                    <input
+                                        id="edit-name"
+                                        name="edit-name"
+                                        type="text"
+                                        value={editForm.name}
+                                        onChange={(e) => setEditForm((f) => f ? { ...f, name: e.target.value } : null)}
+                                        className={inputClass}
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="edit-relation" className={labelClass}>Relation</label>
+                                    <select
+                                        id="edit-relation"
+                                        name="edit-relation"
+                                        value={editForm.relation}
+                                        onChange={(e) => setEditForm((f) => f ? { ...f, relation: e.target.value as TestimonyRelation } : null)}
+                                        className={inputClass}
+                                    >
+                                        {RELATION_OPTIONS.map((r) => (
+                                            <option key={r} value={r}>{r}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="edit-whereWeFirstMet" className={labelClass}>Where we first met</label>
+                                    <input
+                                        id="edit-whereWeFirstMet"
+                                        name="edit-whereWeFirstMet"
+                                        type="text"
+                                        value={editForm.whereWeFirstMet}
+                                        onChange={(e) => setEditForm((f) => f ? { ...f, whereWeFirstMet: e.target.value } : null)}
+                                        className={inputClass}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="edit-professionalRelation" className={labelClass}>Professional relation</label>
+                                    <input
+                                        id="edit-professionalRelation"
+                                        name="edit-professionalRelation"
+                                        type="text"
+                                        value={editForm.professionalRelation}
+                                        onChange={(e) => setEditForm((f) => f ? { ...f, professionalRelation: e.target.value } : null)}
+                                        className={inputClass}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="edit-company" className={labelClass}>Company</label>
+                                    <input
+                                        id="edit-company"
+                                        name="edit-company"
+                                        type="text"
+                                        value={editForm.company}
+                                        onChange={(e) => setEditForm((f) => f ? { ...f, company: e.target.value } : null)}
+                                        className={inputClass}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="edit-position" className={labelClass}>Position</label>
+                                    <input
+                                        id="edit-position"
+                                        name="edit-position"
+                                        type="text"
+                                        value={editForm.position}
+                                        onChange={(e) => setEditForm((f) => f ? { ...f, position: e.target.value } : null)}
+                                        className={inputClass}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="edit-status" className={labelClass}>Status</label>
+                                    <select
+                                        id="edit-status"
+                                        name="edit-status"
+                                        value={editForm.status}
+                                        onChange={(e) => setEditForm((f) => f ? { ...f, status: e.target.value as TestimonyStatus } : null)}
+                                        className={inputClass}
+                                    >
+                                        {STATUS_OPTIONS.map((s) => (
+                                            <option key={s} value={s}>{s}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="edit-comment" className={labelClass}>Comment</label>
+                                    <TestimonialRichEditor
+                                        value={editForm.comment}
+                                        onChange={(html) => setEditForm((f) => f ? { ...f, comment: html } : null)}
+                                        placeholder="Testimonial message"
+                                        required
+                                        aria-label="Comment"
+                                    />
+                                </div>
+                                {editError && (
+                                    <p className="text-sm text-red-600 dark:text-red-400">{editError}</p>
+                                )}
+                                <div className="flex gap-2 pt-2">
+                                    <button
+                                        type="submit"
+                                        disabled={editSaving}
+                                        className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 dark:bg-blue-500 dark:hover:bg-blue-600"
+                                    >
+                                        {editSaving ? "Saving…" : "Save"}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={closeEdit}
+                                        className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 )}
             </div>
         </div>

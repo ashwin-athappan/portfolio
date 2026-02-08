@@ -33,3 +33,15 @@ export interface TestimonyRequest {
         data: string;
     };
 }
+
+/** Dashboard edit: partial update of testimony fields (no image change) */
+export interface TestimonyUpdateRequest {
+    name?: string;
+    relation?: TestimonyRelation;
+    comment?: string;
+    whereWeFirstMet?: string;
+    professionalRelation?: string;
+    company?: string;
+    position?: string;
+    status?: TestimonyStatus;
+}

@@ -1,6 +1,6 @@
-import type { StaticImageData } from "next/image";
+import type {StaticImageData} from "next/image";
 
-import { companyLogos } from "./companyLogos";
+import {companyLogos} from "./companyLogos";
 
 /**
  * Company options for the testimonial form (type-ahead).
@@ -62,13 +62,13 @@ const COMPANY_NAMES = [
     "Recharts", "Nivo", "Visx", "d3.js", "Chart.js", "React Query", "SWR", "Zustand", "Jotai", "Recoil", "XState",
     "React Hook Form", "Zod", "Yup", "Valibot", "Formik", "TanStack Table", "Ag-Grid", "React Flow", "React DnD",
     "Framer Motion", "React Spring", "GSAP", "Three.js", "Babylon.js", "Remix", "Astro", "Eleventy", "Gatsby", "Hugo",
-    "Jekyll", "Nuxt.js", "SvelteKit", "Qwik", "SolidStart", "7 Eleven", "University of Texas at Arlington", "Hughes Systique Corporation", "ISN Software",
-    "Other",
+    "Jekyll", "Nuxt.js", "SvelteKit", "Qwik", "SolidStart", "7 Eleven", "University of Texas at Arlington",
+    "Hughes Systique Corporation", "ISN Software", "HOC", "Other",
 ];
 
 /** HashMap of company name → Company. Use for O(1) lookup by name. */
 export const companiesMap = new Map<string, Company>(
-    COMPANY_NAMES.map((name) => [name, { name, logo: companyLogos[name] ?? null }])
+    COMPANY_NAMES.map((name) => [name, {name, logo: companyLogos[name] ?? null}])
 );
 
 /** Ordered array of all companies (for iteration, e.g. type-ahead list). */

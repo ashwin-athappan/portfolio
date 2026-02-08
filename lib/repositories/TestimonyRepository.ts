@@ -1,5 +1,6 @@
 import { ITestimonyRepository } from "@/lib/interfaces/ITestimonyRepository";
 import { Testimony, TestimonyStatus } from "@/lib/types/Testimony";
+import { TestimonyUpdateRequest } from "@/lib/types/Testimony";
 import TestimonyModel from "@/models/Testimony";
 import mongoose from "mongoose";
 
@@ -57,6 +58,25 @@ export class TestimonyRepository implements ITestimonyRepository {
     async updateStatus(id: string, status: TestimonyStatus): Promise<Testimony | null> {
         if (!mongoose.Types.ObjectId.isValid(id)) return null;
         const updated = await TestimonyModel.findByIdAndUpdate(id, { status }, { new: true });
+        return updated ? mapDocToTestimony(updated) : null;
+    }
+
+    async update(id: string, data: TestimonyUpdateRequest): Promise<Testimony | null> {
+        if (!mongoose.Types.ObjectId.isValid(id)) return null;
+        const update: Record<string, unknown> = {};
+        if (data.name !== undefined) update.name = data.name.trim();
+        if (data.relation !== undefined) update.relation = data.relation;
+        if (data.comment !== undefined) update.comment = data.comment.trim();
+        if (data.whereWeFirstMet !== undefined) update.whereWeFirstMet = data.whereWeFirstMet.trim();
+        if (data.professionalRelation !== undefined) update.professionalRelation = data.professionalRelation.trim();
+        if (data.company !== undefined) update.company = data.company.trim() || undefined;
+        if (data.position !== undefined) update.position = data.position.trim() || undefined;
+        if (data.status !== undefined) update.status = data.status;
+        if (Object.keys(update).length === 0) {
+            const existing = await this.findById(id);
+            return existing;
+        }
+        const updated = await TestimonyModel.findByIdAndUpdate(id, { $set: update }, { new: true });
         return updated ? mapDocToTestimony(updated) : null;
     }
 
