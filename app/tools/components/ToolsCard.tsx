@@ -9,7 +9,6 @@ import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
 interface ToolsCardProps {
     index: number;
     item: {
-        id: number;
         name: string;
         image: StaticImageData;
         link: string;

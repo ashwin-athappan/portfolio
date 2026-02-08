@@ -42,7 +42,7 @@ export default function Resume(): React.JSX.Element {
             startDate: new Date('2025-08-01'),
             details: [
                 'Instructed 60+ students through hands-on labs in Assembly and OS fundamentals (RISC-V/x86, Linux syscalls, processes/threads, memory, synchronization, GDB), improving average lab completion rate by 15%',
-                'Evaluated and provided feedback on 100+ lab/programming assignments; facilitated office hours and exam prep sessions',
+                'Evaluated and provided feedback on <b>100+</b> lab/programming assignments; facilitated office hours and exam prep sessions',
             ]
         },
         {
@@ -52,23 +52,24 @@ export default function Resume(): React.JSX.Element {
             duration: 'Jun 2025 - Aug 2025',
             startDate: new Date('2025-08-01'),
             details: [
-                'Created Python scripts to construct a pipeline that managed day-to-day schedule updates reducing manual intervention by 90%',
+                'Created <em><b>Python</b></em> scripts to construct a pipeline that managed day-to-day schedule updates reducing manual intervention by 90%',
                 'Developed a barcode-based Asset Tracking App to log check-in/out activity, cutting manual data entry time by 70% and improving reporting accuracy',
-                'Automated workflows using Power Automate, Office365 API, and Excel Script, streamlining admin processes',
-                'Supervised and delegated tasks to a team of 20 student workers, ensuring efficient day-to-day operations'
+                'Automated workflows using <em><b>Power Automate</b></em>, <em><b>Office365 API</b></em>, and <em><b>Excel Script</b></em>, streamlining admin processes',
+                'Supervised and delegated tasks to a team of <b>30</b> student workers, ensuring efficient day-to-day operations'
             ]
         },
         {
-            position: 'Backend Developer & DevOps Engineer',
+            position: 'Software Engineer',
             company: 'Hughes Systique Corporation',
             location: 'Bangalore, India',
             duration: 'Jan 2022 – Jul 2024',
             startDate: new Date('2022-01-01'),
             details: [
-                'Migrated monoliths to Spring Boot/Node.js microservices, improving overall availability to 90%',
-                'Replaced 100+ SOAP APIs with RESTful services, reducing network overheads and payload size by 30%',
-                'Integrated Liquibase for DB changes, reducing rollback time from days to minutes',
-                'Built CI/CD pipelines with Docker, Kubernetes, Jenkins, and GKE, reducing deployment time by 50%'
+                'Led the migration of legacy systems to event-driven microservices using <em><b>Spring Boot</b></em> and <em><b>Google Pub/Sub (GCP)</b></em>, significantly increasing system uptime and scalability.',
+                'Collaborated with cross-functional teams to implement ’hard lock’ and ’soft lock’ account security mechanisms and engineered PCI data masking for raw credit card storage.',
+                'Converted <b>100+</b> older SOAP endpoints into lightweight <em><b>RESTful APIs</b></em>, reducing network traffic and data size by <b>30%</b>.',
+                'Built E2E automated deployment pipelines using <em><b>Docker</b></em>, <em><b>Kubernetes (GKE)</b></em>, and <em><b>Google Cloud Build</b></em>, which cut deployment time by <b>50%</b> and removed manual errors.',
+                'Improved database stability by setting up <em><b>Liquibase</b></em> for automated updates and writing database procedures, reducing deployment failures by <b>15%</b>.'
             ]
         },
     ];
@@ -121,7 +122,7 @@ export default function Resume(): React.JSX.Element {
     const skills = [
         {
             name: 'Programming',
-            skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'SQL', 'C++', 'Bash']
+            skills: ['HTML', 'CSS', 'Java', 'Python', 'JavaScript', 'TypeScript', 'SQL', 'C#', 'Bash']
         },
         {
             name: 'Frameworks',
@@ -129,7 +130,7 @@ export default function Resume(): React.JSX.Element {
         },
         {
             name: 'Databases',
-            skills: ['MongoDB', 'MySQL', 'Oracle DB', 'PL/SQL', 'Liquibase']
+            skills: ['MongoDB', 'MySQL', 'Oracle DB', 'Postgres', 'Liquibase']
         },
         {
             name: 'Cloud & DevOps',
@@ -147,9 +148,9 @@ export default function Resume(): React.JSX.Element {
                 {/* Header */}
                 <header className="text-center mb-12">
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Ashwin Athappan</h1>
-                    <p className="text-lg text-gray-600 dark:text-gray-300 mt-1">DevOps Engineer</p>
+                    <p className="text-lg text-gray-600 dark:text-gray-300 mt-1">Software Engineer</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                        ashwinathappank@gmail.com | Arlington, TX
+                        <Link href="mailto:ashwinathappank@gmail.com" className="text-dark-blue hover:underline">ashwinathappank@gmail.com</Link> | Arlington, TX
                     </p>
                 </header>
 

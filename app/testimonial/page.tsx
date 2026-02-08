@@ -5,15 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTestimonialForm } from "@/lib/hooks/useTestimonialForm";
 import { TestimonialRichEditor } from "@/app/components/TestimonialEditor/TestimonialRichEditor";
-import companiesList from "@/lib/data/companies.json";
+import { companies } from "@/lib/data/companies";
 
-const companies = companiesList as string[];
-const knownCompanies = companies.filter((c) => c !== "Other");
+const knownCompanies = companies.filter((c) => c.name !== "Other");
 
-function filterCompanies(query: string): string[] {
+function filterCompanies(query: string): typeof companies {
     const q = query.trim().toLowerCase();
     if (q === "") return [];
-    return knownCompanies.filter((c) => c.toLowerCase().includes(q));
+    return knownCompanies.filter((c) => c.name.toLowerCase().includes(q));
 }
 
 const inputClass =
@@ -51,7 +50,12 @@ export default function TestimonialPage() {
     const companyQuery = company.trim();
     const filteredCompanies = filterCompanies(company);
     const showOther = companyQuery !== "" && filteredCompanies.length === 0;
-    const options = filteredCompanies.length > 0 ? filteredCompanies : showOther ? ["Other"] : [];
+    const options =
+        filteredCompanies.length > 0
+            ? filteredCompanies
+            : showOther
+              ? [{ name: "Other", logo: null }]
+              : [];
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -184,22 +188,22 @@ export default function TestimonialPage() {
                             >
                                 {options.map((opt) => (
                                     <li
-                                        key={opt}
+                                        key={opt.name}
                                         role="option"
                                         className="cursor-pointer px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                                         onMouseDown={(e) => {
                                             e.preventDefault();
-                                            if (opt === "Other") {
+                                            if (opt.name === "Other") {
                                                 // Keep current typed value as custom company
                                             } else {
-                                                setCompany(opt);
+                                                setCompany(opt.name);
                                             }
                                             setCompanyDropdownOpen(false);
                                         }}
                                     >
-                                        {opt === "Other"
+                                        {opt.name === "Other"
                                             ? `Other${companyQuery ? ` — use "${companyQuery}"` : ""}`
-                                            : opt}
+                                            : opt.name}
                                     </li>
                                 ))}
                             </ul>

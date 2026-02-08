@@ -4,7 +4,7 @@
 import React, {useState, useEffect} from 'react';
 import Image from "next/image";
 import {useTheme} from "next-themes";
-import youtube from "@/public/assets/svg/youtube.svg";
+import youtube from "@/public/assets/svg/social/youtube.svg";
 import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
 import StaticPill from "@/app/components/StaticPill/StaticPill";
 

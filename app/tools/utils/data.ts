@@ -1,6 +1,7 @@
 import {StaticImageData} from "next/image";
 
-import CredlyICIP from "@/public/assets/certificates/opswat-introduction-to-critical-infrastructure-protection-icip.png";
+import CredlyICIP
+    from "@/public/assets/certificates/opswat-introduction-to-critical-infrastructure-protection-icip.png";
 import CredlyCybersecurityEssentials from "@/public/assets/certificates/cybersecurity-essentials.png";
 import CredlyPythonEssentials from "@/public/assets/certificates/python-essentials-1.1.png";
 import CredlyGitHubFoundations from "@/public/assets/certificates/github-foundations.png";
@@ -12,7 +13,8 @@ import HackerRankJavaScriptBasic from "@/public/assets/certificates/JSBasic.png"
 import HackerRankPythonBasic from "@/public/assets/certificates/PythonBasic.png";
 import HackerRankSQLBasic from "@/public/assets/certificates/SQLBasic.png";
 
-import DockerProfessionalCertificate from "@/public/assets/certificates/docker-foundations-professional-certificate.jpg";
+import DockerProfessionalCertificate
+    from "@/public/assets/certificates/docker-foundations-professional-certificate.jpg";
 
 import AWSIntroCloud101 from "@/public/assets/certificates/aws-educate-introduction-to-cloud-101.png";
 import AWSGettingStartedStorage from "@/public/assets/certificates/aws-educate-getting-started-with-storage.png";
@@ -20,37 +22,50 @@ import AWSGettingStartedCompute from "@/public/assets/certificates/aws-educate-g
 import AWSGettingStartedDatabases from "@/public/assets/certificates/aws-educate-getting-started-with-databases.png";
 import AWSGettingStartedNetworking from "@/public/assets/certificates/aws-educate-getting-started-with-networking.png";
 
-import html from "@/public/assets/svg/html5.svg";
-import css from "@/public/assets/svg/css3.svg";
-import nextjs from "@/public/assets/svg/nextjs2.svg";
-import springBoot from "@/public/assets/svg/spring-boot.svg";
-import reactjs from "@/public/assets/svg/reactjs.svg";
-import nodejs from "@/public/assets/svg/nodejs.svg";
-import javascript from "@/public/assets/svg/js.svg";
-import typescript from "@/public/assets/svg/typescript.svg";
-import java from "@/public/assets/svg/java.svg";
-import python from "@/public/assets/svg/python.svg";
-import django from "@/public/assets/svg/django.svg";
-import tailwind from "@/public/assets/svg/tailwindcss.svg";
-import bootstrap from "@/public/assets/svg/bootstrap.svg";
-import mysql from "@/public/assets/svg/mysql.svg";
-import mongodb from "@/public/assets/svg/mongodb.svg";
-import graphql from "@/public/assets/svg/graphql.svg";
-import docker from "@/public/assets/svg/docker.svg";
-import kubernetes from "@/public/assets/svg/kubernetes.svg";
-import github_black from "@/public/assets/svg/github.svg";
-import git from "@/public/assets/svg/git.svg";
-import linux from "@/public/assets/svg/linux.svg";
-import jira from "@/public/assets/svg/jira.svg";
-import bitbucket from "@/public/assets/svg/bitbucket.svg";
-import aws from "@/public/assets/svg/aws.svg";
-import gcp from "@/public/assets/svg/gcp.svg";
+import html from "@/public/assets/svg/languages/html5.svg";
+import css from "@/public/assets/svg/languages/css3.svg";
+import javascript from "@/public/assets/svg/languages/js.svg";
+import typescript from "@/public/assets/svg/languages/typescript.svg";
+import java from "@/public/assets/svg/languages/java.svg";
+import python from "@/public/assets/svg/languages/python.svg";
+import c from "@/public/assets/svg/languages/c.svg";
+import cpp from "@/public/assets/svg/languages/cpp.svg";
+import csharp from "@/public/assets/svg/languages/csharp.svg";
 
-import vscode from "@/public/assets/svg/vscode.svg";
-import idea from "@/public/assets/svg/intellij_idea.svg";
-import webstorm from "@/public/assets/svg/webstorm.svg";
-import pycharm from "@/public/assets/svg/pycharm.svg";
-import postman from "@/public/assets/svg/postman.svg";
+import nextjs from "@/public/assets/svg/frameworks/nextjs2.svg";
+import springBoot from "@/public/assets/svg/frameworks/spring-boot.svg";
+import reactjs from "@/public/assets/svg/frameworks/reactjs.svg";
+import redux from "@/public/assets/svg/frameworks/redux.svg";
+import nodejs from "@/public/assets/svg/frameworks/nodejs.svg";
+import express from "@/public/assets/svg/frameworks/express.svg";
+import jest from "@/public/assets/svg/frameworks/jest.svg";
+import django from "@/public/assets/svg/frameworks/django.svg";
+import dotnetcore from "@/public/assets/svg/frameworks/dotnetcore.svg";
+import tailwind from "@/public/assets/svg/frameworks/tailwindcss.svg";
+import bootstrap from "@/public/assets/svg/frameworks/bootstrap.svg";
+import mysql from "@/public/assets/svg/database/mysql.svg";
+import postgres from "@/public/assets/svg/database/postgres.svg";
+import mongodb from "@/public/assets/svg/database/mongodb.svg";
+import prisma from "@/public/assets/svg/database/prisma.svg";
+import graphql from "@/public/assets/svg/database/graphql.svg";
+
+import docker from "@/public/assets/svg/devops/docker.svg";
+import kubernetes from "@/public/assets/svg/devops/kubernetes.svg";
+import github_black from "@/public/assets/svg/devops/github.svg";
+import git from "@/public/assets/svg/devops/git.svg";
+import linux from "@/public/assets/svg/devops/linux.svg";
+import jira from "@/public/assets/svg/devops/jira.svg";
+import bitbucket from "@/public/assets/svg/devops/bitbucket.svg";
+import aws from "@/public/assets/svg/devops/aws.svg";
+import gcp from "@/public/assets/svg/devops/gcp.svg";
+import maven from "@/public/assets/svg/devops/maven.svg";
+import webpack from "@/public/assets/svg/devops/webpack.svg";
+
+import vscode from "@/public/assets/svg/tools/vscode.svg";
+import idea from "@/public/assets/svg/tools/intellij_idea.svg";
+import webstorm from "@/public/assets/svg/tools/webstorm.svg";
+import pycharm from "@/public/assets/svg/tools/pycharm.svg";
+import postman from "@/public/assets/svg/tools/postman.svg";
 
 interface certificationProps {
     id: string;
@@ -62,12 +77,12 @@ interface certificationProps {
 }
 
 interface toolsAndTechnologiesProps {
-    id: number;
     name: string;
     image: StaticImageData;
     link: string;
     description: string;
 }
+
 
 const certificates: certificationProps[] = [
     {
@@ -192,215 +207,259 @@ const certificates: certificationProps[] = [
     }
 ];
 
-const toolsAndTechnologies: toolsAndTechnologiesProps[] = [
+const languages: toolsAndTechnologiesProps[] = [
     {
-        id: 1,
         name: "HTML5",
         image: html,
         link: "https://developer.mozilla.org/en-US/docs/Web/HTML",
         description: "HTML5 is a markup language for structuring and presenting content on the web."
     },
     {
-        id: 2,
         name: "CSS3",
         image: css,
         link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
         description: "CSS3 extends CSS2 with new features for better styling, animations, and layouts."
     },
     {
-        id: 3,
         name: "JavaScript",
         image: javascript,
         link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
         description: "JavaScript is a high-level programming language that follows the ECMAScript standard."
     },
     {
-        id: 4,
         name: "TypeScript",
         image: typescript,
         link: "https://www.typescriptlang.org/",
         description: "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript."
     },
     {
-        id: 5,
+        name: "C",
+        image: c,
+        link: "https://www.w3schools.com/c/",
+        description: "C is a general-purpose programming language that provides low-level access to memory."
+    },
+    {
+        name: "C++",
+        image: cpp,
+        link: "https://www.w3schools.com/cpp/",
+        description: "C++ is an extension of C that includes object-oriented programming features."
+    },
+    {
+        name: "C#",
+        image: csharp,
+        link: "https://learn.microsoft.com/en-us/dotnet/csharp/",
+        description: "C# is a modern, object-oriented programming language developed by Microsoft."
+    },
+    {
         name: "Java",
         image: java,
         link: "https://www.java.com/",
         description: "Java is an object-oriented programming language used to build applications across platforms."
     },
     {
-        id: 6,
         name: "Python",
         image: python,
         link: "https://www.python.org/",
         description: "Python is a high-level, interpreted programming language known for its readability."
     },
+];
+
+const frameworks: toolsAndTechnologiesProps[] = [
     {
-        id: 7,
-        name: "Django",
-        image: django,
-        link: "https://www.djangoproject.com/",
-        description: "Django is a Python web framework for rapid development and clean, pragmatic design."
-    },
-    {
-        id: 8,
         name: "Node.js",
         image: nodejs,
         link: "https://nodejs.org/",
         description: "Node.js is a runtime for executing JavaScript on the server using the V8 engine."
     },
     {
-        id: 9,
         name: "React.js",
         image: reactjs,
         link: "https://reactjs.org/",
         description: "React is a JavaScript library for building interactive user interfaces efficiently."
     },
     {
-        id: 10,
+        name: "Redux",
+        image: redux,
+        link: "https://redux.js.org/",
+        description: "Redux is a predictable state container for JavaScript apps, often used with React."
+    },
+    {
         name: "Next.js",
         image: nextjs,
         link: "https://nextjs.org/",
         description: "Next.js is a React framework that enables SSR, static site generation, and API routes."
     },
     {
-        id: 11,
+        name: "Express.js",
+        image: express,
+        link: "https://expressjs.com/",
+        description: "Express is a minimal and flexible Node.js web application framework for building APIs and web apps."
+    },
+    {
+        name: "Jest",
+        image: jest,
+        link: "https://jestjs.io/",
+        description: "Jest is a JavaScript testing framework for ensuring code correctness with a focus on simplicity."
+    },
+    {
         name: "Spring Boot",
         image: springBoot,
         link: "https://spring.io/projects/spring-boot",
         description: "Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can \"just run\"."
     },
     {
-        id: 12,
+        name: "Django",
+        image: django,
+        link: "https://www.djangoproject.com/",
+        description: "Django is a Python web framework for rapid development and clean, pragmatic design."
+    },
+    {
+        name: ".NET Core",
+        image: dotnetcore,
+        link: "https://dotnet.microsoft.com/en-us/",
+        description: "Dotnet Core is a cross-platform, high-performance framework for building modern applications."
+    },
+    {
         name: "Tailwind CSS",
         image: tailwind,
         link: "https://tailwindcss.com/",
         description: "Tailwind CSS is a utility-first framework for quickly designing responsive UIs."
     },
     {
-        id: 13,
         name: "Bootstrap",
         image: bootstrap,
         link: "https://getbootstrap.com/",
         description: "Bootstrap is a framework for creating responsive, mobile-first web pages."
-    },
+    }
+];
+
+const devops: toolsAndTechnologiesProps[] = [
     {
-        id: 14,
-        name: "MySQL",
-        image: mysql,
-        link: "https://www.mysql.com/",
-        description: "MySQL is an open-source relational database management system for storing structured data."
-    },
-    {
-        id: 15,
-        name: "MongoDB",
-        image: mongodb,
-        link: "https://www.mongodb.com/",
-        description: "MongoDB is a NoSQL database that stores data in flexible, JSON-like documents."
-    },
-    {
-        id: 16,
-        name: "GraphQL",
-        image: graphql,
-        link: "https://graphql.org/",
-        description: "GraphQL is a query language for APIs that allows clients to request specific data."
-    },
-    {
-        id: 17,
         name: "Docker",
         image: docker,
         link: "https://www.docker.com/",
         description: "Docker uses OS-level virtualization to package software in lightweight containers."
     },
     {
-        id: 18,
         name: "Kubernetes",
         image: kubernetes,
         link: "https://kubernetes.io/",
         description: "Kubernetes automates the deployment, scaling, and management of containerized applications."
     },
     {
-        id: 19,
         name: "GitHub",
         image: github_black,
         link: "https://github.com",
         description: "GitHub provides hosting for software development and version control using Git."
     },
     {
-        id: 20,
         name: "Git",
         image: git,
         link: "https://git-scm.com/",
         description: "Git is a distributed version control system for tracking changes in source code."
     },
     {
-        id: 21,
         name: "Linux",
         image: linux,
         link: "https://www.linux.org/",
         description: "Linux is a widely used open-source operating system based on the Unix-like kernel."
     },
     {
-        id: 22,
         name: "Jira",
         image: jira,
         link: "https://www.atlassian.com/software/jira",
         description: "Jira is an issue-tracking tool for bug tracking and agile project management."
     },
     {
-        id: 23,
         name: "Bitbucket",
         image: bitbucket,
         link: "https://bitbucket.org/",
         description: "Bitbucket is a Git repository hosting service owned by Atlassian."
     },
     {
-        id: 24,
         name: "AWS",
         image: aws,
         link: "https://aws.amazon.com/",
         description: "AWS provides cloud computing services with pay-as-you-go pricing."
     },
     {
-        id: 25,
         name: "GCP",
         image: gcp,
         link: "https://cloud.google.com/",
         description: "GCP is Google’s cloud platform offering various computing and storage solutions."
+    }, {
+        name: "Maven",
+        image: maven,
+        link: "https://maven.apache.org/",
+        description: "Maven is a build automation tool used primarily for Java projects."
+    },
+    {
+        name: "Webpack",
+        image: webpack,
+        link: "https://webpack.js.org/",
+        description: "Webpack is a module bundler for JavaScript applications."
     }
 ];
 
-const ide: toolsAndTechnologiesProps[] = [
+const databases: toolsAndTechnologiesProps[] = [
     {
-        id: 1,
+        name: "MySQL",
+        image: mysql,
+        link: "https://www.mysql.com/",
+        description: "MySQL is an open-source relational database management system for storing structured data."
+    },
+    {
+        name: "PostgreSQL",
+        image: postgres,
+        link: "https://www.postgresql.org/",
+        description: "PostgreSQL is an open-source relational database known for its extensibility and standards compliance."
+    },
+    {
+        name: "MongoDB",
+        image: mongodb,
+        link: "https://www.mongodb.com/",
+        description: "MongoDB is a NoSQL database that stores data in flexible, JSON-like documents."
+    },
+    {
+        name: "PrismaORM",
+        image: prisma,
+        link: "https://www.prisma.io/",
+        description: "Prisma is an open-source ORM that simplifies database access and management for Node.js and TypeScript."
+    },
+    {
+        name: "GraphQL",
+        image: graphql,
+        link: "https://graphql.org/",
+        description: "GraphQL is a query language for APIs that allows clients to request specific data."
+    }
+];
+
+const tools: toolsAndTechnologiesProps[] = [
+    {
         name: "Visual Studio Code",
         image: vscode,
         link: "https://code.visualstudio.com/",
         description: "VS Code is a lightweight, powerful code editor with debugging and Git."
     },
     {
-        id: 2,
         name: "PyCharm",
         image: pycharm,
         link: "https://www.jetbrains.com/pycharm/",
         description: "PyCharm is a Python IDE with smart code completion and debugging tools."
     },
     {
-        id: 3,
         name: "IntelliJ IDEA",
         image: idea,
         link: "https://www.jetbrains.com/idea/",
         description: "IntelliJ IDEA is a Java IDE with advanced coding assistance and built-in tools."
     },
     {
-        id: 4,
         name: "WebStorm",
         image: webstorm,
         link: "https://www.jetbrains.com/webstorm/",
         description: "WebStorm is a JavaScript IDE optimized for front-end and Node.js development."
     },
     {
-        id: 5,
         name: "Postman",
         image: postman,
         link: "https://www.postman.com/",
@@ -409,4 +468,4 @@ const ide: toolsAndTechnologiesProps[] = [
 ];
 
 
-export {certificates, toolsAndTechnologies, ide};
+export {certificates, languages, frameworks, devops, databases, tools};

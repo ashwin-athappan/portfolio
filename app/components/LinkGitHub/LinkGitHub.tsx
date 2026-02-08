@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Image from "next/image";
-import lightGitHub from "@/public/assets/svg/github_white.svg";
-import darkGitHub from "@/public/assets/svg/github.svg";
+import lightGitHub from "@/public/assets/svg/devops/github_white.svg";
+import darkGitHub from "@/public/assets/svg/devops/github.svg";
 import Link from "next/link";
 
 interface LinkGitHubProps {

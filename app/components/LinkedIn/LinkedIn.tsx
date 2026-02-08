@@ -4,7 +4,7 @@
 import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import {useTheme} from "next-themes";
-import linkedin from '@/public/assets/svg/linkedin.svg';
+import linkedin from '@/public/assets/svg/social/linkedin.svg';
 import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
 
 const LinkedIn = () => {

@@ -63,14 +63,16 @@ const WorkExperienceTimeLineComponent: React.FC<TimelineProps> = ({
                                     {Array.isArray(event.details) ? (
                                         <ul>
                                             {event.details.map((paragraph, idx) => (
-                                                <li key={idx} className="mb-3 last:mb-0 max-w-[450px]">
-                                                    {paragraph}
-                                                </li>
+                                                <li
+                                                    key={idx}
+                                                    className="mb-3 last:mb-0 max-w-[450px]"
+                                                    dangerouslySetInnerHTML={{ __html: paragraph }}
+                                                />
                                             ))
                                             }
                                         </ul>
                                     ) : (
-                                        <p>{event.details}</p>
+                                        <p dangerouslySetInnerHTML={{ __html: event.details }} />
                                     )}
                                 </div>
                             </div>

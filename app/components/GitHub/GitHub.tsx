@@ -4,8 +4,8 @@
 import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import {useTheme} from "next-themes";
-import github_dark from '@/public/assets/svg/github.svg';
-import github_light from '@/public/assets/svg/github_white.svg';
+import github_dark from '@/public/assets/svg/devops/github.svg';
+import github_light from '@/public/assets/svg/devops/github_white.svg';
 import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
 
 const GitHub = () => {

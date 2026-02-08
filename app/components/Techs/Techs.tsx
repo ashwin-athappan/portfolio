@@ -5,18 +5,18 @@ import React, {useEffect, useState} from "react";
 import {useTheme} from "next-themes";
 
 // Import SVGs as named components
-import Html5Icon from '@/public/assets/svg/html5.svg';
-import PythonIcon from '@/public/assets/svg/python.svg';
-import MysqlIcon from '@/public/assets/svg/mysql.svg';
-import NextJsIcon from '@/public/assets/svg/nextjs2.svg';
-import GithubIcon from '@/public/assets/svg/github.svg';
-import JsIcon from '@/public/assets/svg/js.svg';
-import JiraIcon from '@/public/assets/svg/jira.svg';
-import Docker from '@/public/assets/svg/docker.svg';
-import TailwindIcon from '@/public/assets/svg/tailwindcss.svg';
-import PostmanIcon from '@/public/assets/svg/postman.svg';
-import KubernetesIcon from '@/public/assets/svg/kubernetes.svg';
-import NodeJSIcon from '@/public/assets/svg/nodejs.svg';
+import Html5Icon from '@/public/assets/svg/languages/html5.svg';
+import PythonIcon from '@/public/assets/svg/languages/python.svg';
+import MysqlIcon from '@/public/assets/svg/database/mysql.svg';
+import NextJsIcon from '@/public/assets/svg/frameworks/nextjs2.svg';
+import GithubIcon from '@/public/assets/svg/devops/github.svg';
+import JsIcon from '@/public/assets/svg/languages/js.svg';
+import JiraIcon from '@/public/assets/svg/devops/jira.svg';
+import Docker from '@/public/assets/svg/devops/docker.svg';
+import TailwindIcon from '@/public/assets/svg/frameworks/tailwindcss.svg';
+import PostmanIcon from '@/public/assets/svg/tools/postman.svg';
+import KubernetesIcon from '@/public/assets/svg/devops/kubernetes.svg';
+import NodeJSIcon from '@/public/assets/svg/frameworks/nodejs.svg';
 
 import LinkArrow from "@/app/components/LinkArrow/LinkArrow";
 
