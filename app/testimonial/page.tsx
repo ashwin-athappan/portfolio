@@ -190,6 +190,7 @@ export default function TestimonialPage() {
                                     <li
                                         key={opt.name}
                                         role="option"
+                                        aria-selected={opt.name === company}
                                         className="cursor-pointer px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                                         onMouseDown={(e) => {
                                             e.preventDefault();

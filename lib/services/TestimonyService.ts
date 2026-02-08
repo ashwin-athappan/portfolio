@@ -20,7 +20,7 @@ export class TestimonyService implements ITestimonyService {
         }
 
         let imageData: string | undefined;
-        let imageUrl: string | undefined = data.imageUrl;
+        const imageUrl: string | undefined = data.imageUrl;
 
         if (imageUrl) {
             // Use provided public URL (e.g. Vercel Blob)

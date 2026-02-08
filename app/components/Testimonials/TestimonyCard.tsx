@@ -6,7 +6,6 @@ import { Testimony } from "@/lib/types/Testimony";
 import { TestimonialContent } from "./TestimonialContent";
 import blank_user_black from "@/public/assets/svg/user_black.svg";
 import { companiesMap } from "@/lib/data/companies";
-import styles from "./Testimonials.module.css";
 
 export type ImageSrc = string | typeof blank_user_black;
 
@@ -53,12 +52,13 @@ export function TestimonyCard({ testimonial, getImageSrc, isDataUrl }: Testimony
             <div className="mb-5 flex">
                 <div className="mr-5 shrink-0">
                     {isDataUrl(src) ? (
-                        <img
+                        <Image
                             src={src}
                             alt={testimonial.name}
                             width={80}
                             height={80}
                             className="h-20 w-20 rounded-full border-2 border-gray-300 object-cover dark:border-dark-nav-border"
+                            unoptimized
                         />
                     ) : (
                         <Image

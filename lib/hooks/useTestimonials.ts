@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { HttpClient } from "@/lib/clients/HttpClient";
 import { Testimony } from "@/lib/types/Testimony";
 
@@ -12,9 +12,9 @@ export function useTestimonials(fetchInterval: number = 3000000): UseTestimonial
     const [testimonials, setTestimonials] = useState<Testimony[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const httpClient = new HttpClient();
+    const httpClient = useMemo(() => new HttpClient(), []);
 
-    const fetchTestimonials = async () => {
+    const fetchTestimonials = useCallback(async () => {
         setIsLoading(true);
         setError(null);
         try {
@@ -26,7 +26,7 @@ export function useTestimonials(fetchInterval: number = 3000000): UseTestimonial
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [httpClient]);
 
     useEffect(() => {
         fetchTestimonials();
@@ -36,7 +36,7 @@ export function useTestimonials(fetchInterval: number = 3000000): UseTestimonial
         }, fetchInterval);
 
         return () => clearInterval(intervalId);
-    }, [fetchInterval]);
+    }, [fetchTestimonials, fetchInterval]);
 
     return { testimonials, isLoading, error };
 }

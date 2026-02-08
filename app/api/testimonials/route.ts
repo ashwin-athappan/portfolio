@@ -27,7 +27,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         console.error("Failed to add testimony:", err);
 
         // Check if it's a validation error
-        let errorMessage = "Failed to create testimony";
+        const errorMessage = "Failed to create testimony";
         try {
             const parsedError = JSON.parse((err as Error).message);
             if (typeof parsedError === 'object') {

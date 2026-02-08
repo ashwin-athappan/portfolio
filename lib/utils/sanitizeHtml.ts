@@ -25,7 +25,7 @@ function isAllowedTag(tagName: string): boolean {
 export function sanitizeHtml(html: string): string {
     if (!html || typeof html !== "string") return "";
 
-    let out = html
+    const out = html
         .replace(DANGEROUS_BLOCKS, "")
         .replace(/<[^>]+>/g, (tag) => {
             const match = tag.match(/^<\/?([a-z][a-z0-9]*)/i);

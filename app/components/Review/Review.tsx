@@ -6,9 +6,7 @@ import {useReviewForm} from "@/lib/hooks/useReviewForm";
 
 const Review = (): React.JSX.Element => {
     const {
-        filename,
         previewImage,
-        imageData,
         nameField,
         relationField,
         commentField,

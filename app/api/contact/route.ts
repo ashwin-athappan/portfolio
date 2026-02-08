@@ -18,7 +18,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         console.error("Failed to send message:", err);
 
         // Check if it's a validation error
-        let errorMessage = "Failed to send message";
+        const errorMessage = "Failed to send message";
         try {
             const parsedError = JSON.parse((err as Error).message);
             if (typeof parsedError === 'object') {
