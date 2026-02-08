@@ -14,6 +14,8 @@ export async function addTestimony(formData: FormData): Promise<AddTestimonyResu
         const relation = formData.get("relation");
         const whereWeFirstMet = formData.get("whereWeFirstMet");
         const professionalRelation = formData.get("professionalRelation");
+        const company = formData.get("company");
+        const position = formData.get("position");
         const image = formData.get("image") as File | null;
 
         if (
@@ -53,6 +55,8 @@ export async function addTestimony(formData: FormData): Promise<AddTestimonyResu
             comment: comment.trim(),
             whereWeFirstMet: whereWeFirstMet.trim(),
             professionalRelation: professionalRelation.trim(),
+            company: typeof company === "string" ? company.trim() : undefined,
+            position: typeof position === "string" ? position.trim() : undefined,
             imageUrl,
         });
 

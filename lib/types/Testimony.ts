@@ -11,6 +11,10 @@ export interface Testimony {
     imageData?: string;
     whereWeFirstMet?: string;
     professionalRelation?: string;
+    /** Current company the person works for */
+    company?: string;
+    /** Their position at that company */
+    position?: string;
     status?: TestimonyStatus;
 }
 
@@ -20,6 +24,8 @@ export interface TestimonyRequest {
     comment: string;
     whereWeFirstMet: string;
     professionalRelation: string;
+    company?: string;
+    position?: string;
     /** Public image URL (e.g. from Vercel Blob) */
     imageUrl?: string;
     image?: {

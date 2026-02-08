@@ -39,6 +39,8 @@ export class TestimonyService implements ITestimonyService {
             imageData,
             whereWeFirstMet: data.whereWeFirstMet.trim(),
             professionalRelation: data.professionalRelation.trim(),
+            company: data.company?.trim(),
+            position: data.position?.trim(),
             status: "pending",
         });
         testimonialsCache.invalidate();

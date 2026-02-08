@@ -9,6 +9,8 @@ const TestimonySchema = new mongoose.Schema({
     imageData: { type: String, required: false },
     whereWeFirstMet: { type: String, required: true },
     professionalRelation: { type: String, required: true },
+    company: { type: String, required: false },
+    position: { type: String, required: false },
     status: { type: String, enum: ['pending', 'approved', 'rejected'], required: true, default: 'pending' },
 });
 

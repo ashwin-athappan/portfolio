@@ -24,6 +24,11 @@ export interface UseTestimonialFormReturn {
     setProfessionalRelation: (v: string) => void;
     setRelation: (v: TestimonyRelation) => void;
     relationOptions: TestimonyRelation[];
+    // Current company & position
+    company: string;
+    position: string;
+    setCompany: (v: string) => void;
+    setPosition: (v: string) => void;
     // Rest of form
     name: string;
     comment: string;
@@ -43,6 +48,8 @@ export function useTestimonialForm(): UseTestimonialFormReturn {
     const [whereWeFirstMet, setWhereWeFirstMet] = useState("");
     const [professionalRelation, setProfessionalRelation] = useState("");
     const [relation, setRelation] = useState<TestimonyRelation>("COLLEAGUE");
+    const [company, setCompany] = useState("");
+    const [position, setPosition] = useState("");
     const [name, setName] = useState("");
     const [comment, setComment] = useState("");
     const [filename, setFilename] = useState<
@@ -96,6 +103,8 @@ export function useTestimonialForm(): UseTestimonialFormReturn {
         formData.set("relation", relation);
         formData.set("whereWeFirstMet", whereWeFirstMet.trim());
         formData.set("professionalRelation", professionalRelation.trim());
+        formData.set("company", company.trim());
+        formData.set("position", position.trim());
         if (imageFile) {
             formData.set("image", imageFile);
         }
@@ -106,6 +115,8 @@ export function useTestimonialForm(): UseTestimonialFormReturn {
             setComment("");
             setWhereWeFirstMet("");
             setProfessionalRelation("");
+            setCompany("");
+            setPosition("");
             setFilename(DEFAULT_USER_IMAGE_STRING);
             setImageData(null);
             setImageFile(null);
@@ -128,6 +139,10 @@ export function useTestimonialForm(): UseTestimonialFormReturn {
         setProfessionalRelation,
         setRelation,
         relationOptions: RELATION_OPTIONS,
+        company,
+        position,
+        setCompany,
+        setPosition,
         name,
         comment,
         filename,

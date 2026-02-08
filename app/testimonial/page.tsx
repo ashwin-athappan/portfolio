@@ -1,10 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTestimonialForm } from "@/lib/hooks/useTestimonialForm";
 import { TestimonialRichEditor } from "@/app/components/TestimonialEditor/TestimonialRichEditor";
+import companiesList from "@/lib/data/companies.json";
+
+const companies = companiesList as string[];
+const knownCompanies = companies.filter((c) => c !== "Other");
+
+function filterCompanies(query: string): string[] {
+    const q = query.trim().toLowerCase();
+    if (q === "") return [];
+    return knownCompanies.filter((c) => c.toLowerCase().includes(q));
+}
 
 const inputClass =
     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
@@ -20,6 +30,10 @@ export default function TestimonialPage() {
         setProfessionalRelation,
         setRelation,
         relationOptions,
+        company,
+        position,
+        setCompany,
+        setPosition,
         name,
         comment,
         previewImage,
@@ -30,6 +44,24 @@ export default function TestimonialPage() {
         submitted,
         error,
     } = useTestimonialForm();
+
+    const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
+    const companyWrapperRef = useRef<HTMLDivElement>(null);
+
+    const companyQuery = company.trim();
+    const filteredCompanies = filterCompanies(company);
+    const showOther = companyQuery !== "" && filteredCompanies.length === 0;
+    const options = filteredCompanies.length > 0 ? filteredCompanies : showOther ? ["Other"] : [];
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (companyWrapperRef.current && !companyWrapperRef.current.contains(event.target as Node)) {
+                setCompanyDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     if (submitted) {
         return (
@@ -125,6 +157,68 @@ export default function TestimonialPage() {
                                 </option>
                             ))}
                         </select>
+                    </div>
+
+                    {/* Current company (type-ahead: filter from list, or Other if no match) */}
+                    <div className="relative mb-5" ref={companyWrapperRef}>
+                        <label htmlFor="company" className={labelClass}>
+                            Current company
+                        </label>
+                        <input
+                            type="text"
+                            id="company"
+                            value={company}
+                            onChange={(e) => {
+                                setCompany(e.target.value);
+                                setCompanyDropdownOpen(true);
+                            }}
+                            onFocus={() => setCompanyDropdownOpen(true)}
+                            className={inputClass}
+                            placeholder="Type to search companies"
+                            autoComplete="off"
+                        />
+                        {companyDropdownOpen && options.length > 0 && (
+                            <ul
+                                className="absolute z-10 mt-1 max-h-48 w-full overflow-auto rounded-lg border border-gray-300 bg-white py-1 text-sm shadow-lg dark:border-gray-600 dark:bg-dark-element"
+                                role="listbox"
+                            >
+                                {options.map((opt) => (
+                                    <li
+                                        key={opt}
+                                        role="option"
+                                        className="cursor-pointer px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                        onMouseDown={(e) => {
+                                            e.preventDefault();
+                                            if (opt === "Other") {
+                                                // Keep current typed value as custom company
+                                            } else {
+                                                setCompany(opt);
+                                            }
+                                            setCompanyDropdownOpen(false);
+                                        }}
+                                    >
+                                        {opt === "Other"
+                                            ? `Other${companyQuery ? ` — use "${companyQuery}"` : ""}`
+                                            : opt}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+
+                    {/* Position at company */}
+                    <div className="mb-5">
+                        <label htmlFor="position" className={labelClass}>
+                            Position at company
+                        </label>
+                        <input
+                            type="text"
+                            id="position"
+                            value={position}
+                            onChange={(e) => setPosition(e.target.value)}
+                            className={inputClass}
+                            placeholder="e.g. Software Engineer, Product Manager"
+                        />
                     </div>
 
                     {/* Name */}

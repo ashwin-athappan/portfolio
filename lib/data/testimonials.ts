@@ -37,4 +37,10 @@ export const mockTestimonials: Testimony[] = [
         comment: 'Exceeded my expectations!',
         relation: "COLLEAGUE",
     },
+    {
+        _id: "7",
+        name: 'Frank Green',
+        comment: 'A must-have',
+        relation: "FAMILY",
+    }
 ];

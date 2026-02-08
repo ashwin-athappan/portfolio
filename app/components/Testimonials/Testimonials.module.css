@@ -1,15 +1,13 @@
-@keyframes scroll {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-50%);
-    }
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&display=swap");
+
+.testimonialsSection {
+    font-family: "Barlow Semi Condensed", sans-serif;
 }
 
-.animate_scroll {
-    animation: scroll 20s linear infinite;
+.testimonialCardWrap {
+    flex: 1;
     display: flex;
-    flex-direction: column; /* Change to vertical direction */
-    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 0;
 }

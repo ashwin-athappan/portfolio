@@ -1,102 +1,106 @@
 "use client";
 
-import React from 'react';
-import Link from "next/link";
-import styles from './Testimonials.module.css';
-import Image from "next/image";
+import React, { useState } from "react";
+import styles from "./Testimonials.module.css";
 import { useTestimonials } from "@/lib/hooks/useTestimonials";
 import { mockTestimonials } from "@/lib/data/testimonials";
 import blank_user_black from "@/public/assets/svg/user_black.svg";
 import { Testimony } from "@/lib/types/Testimony";
-import { TestimonialContent } from "./TestimonialContent";
+import type { ImageSrc } from "./TestimonyCard";
+import { TestimonyCard } from "./TestimonyCard";
+import { TestimonialsSectionHeader } from "./TestimonialsSectionHeader";
+import { TestimonialsCtaLink } from "./TestimonialsCtaLink";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+function getImageSrc(testimonial: Testimony): ImageSrc {
+    if (
+        testimonial.imageData &&
+        typeof testimonial.imageData === "string" &&
+        testimonial.imageData.startsWith("data:")
+    )
+        return testimonial.imageData;
+    const url = testimonial.imageUrl;
+    if (!url || typeof url !== "string") return blank_user_black;
+    if (url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://"))
+        return url;
+    return blank_user_black;
+}
+
+function isDataUrl(src: ImageSrc): src is string {
+    return typeof src === "string" && src.startsWith("data:");
+}
 
 const Testimonials = (): React.JSX.Element => {
-    const { testimonials: fetchedTestimonials, isLoading, error } = useTestimonials();
+    const { testimonials: fetchedTestimonials, error } = useTestimonials();
+    const [activeIndex, setActiveIndex] = useState(0);
 
-    // Use fetched testimonials if available, otherwise fall back to mock data
-    const testimonials: Testimony[] = fetchedTestimonials.length > 0
-        ? fetchedTestimonials
-        : mockTestimonials.map(t => ({
-            ...t,
-            imageUrl: t.imageUrl || blank_user_black,
-        }));
+    const testimonials: Testimony[] =
+        fetchedTestimonials.length > 0
+            ? fetchedTestimonials
+            : mockTestimonials.map((t) => ({
+                  ...t,
+                  imageUrl: t.imageUrl || blank_user_black,
+              }));
 
-    const getImageSrc = (testimonial: Testimony): string | typeof blank_user_black => {
-        if (testimonial.imageData && typeof testimonial.imageData === "string" && testimonial.imageData.startsWith("data:"))
-            return testimonial.imageData;
-        const url = testimonial.imageUrl;
-        if (!url || typeof url !== "string") return blank_user_black;
-        if (url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://"))
-            return url;
-        return blank_user_black;
+    const N = testimonials.length;
+
+    const goPrev = () => {
+        if (N === 0) return;
+        setActiveIndex((i) => (i - 1 + N) % N);
     };
 
-    const isDataUrl = (src: string | typeof blank_user_black): src is string =>
-        typeof src === "string" && src.startsWith("data:");
+    const goNext = () => {
+        if (N === 0) return;
+        setActiveIndex((i) => (i + 1) % N);
+    };
 
     return (
-        <div className="max-w-full flex flex-col space-y-6">
-            <div className="flex justify-center px-4">
-                <Link
-                    href="/testimonial"
-                    className="rounded-lg bg-blue-500 px-5 py-2.5 font-semibold text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700"
-                >
-                    Give testimony
-                </Link>
-            </div>
-        <div className="max-w-full flex space-y-8">
-            {[1, 2].map((row) => (
-                <div
-                    key={row}
-                    className="relative mx-5 overflow-hidden"
-                >
-                    <div id="animate_scroll" className={`flex ${styles.animate_scroll}`}>
-                        {[...testimonials, ...testimonials].map((testimonial, index) => (
-                            <div
-                                key={`${row}-${testimonial._id}-${index}`}
-                                className="flex flex-col w-64 p-4 my-5 bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border shadow-lg rounded-lg mx-2"
-                            >
-                                <hr/>
-                                {(() => {
-                                    const src = getImageSrc(testimonial);
-                                    return isDataUrl(src) ? (
-                                        <img
-                                            src={src}
-                                            alt={testimonial.name}
-                                            width={50}
-                                            height={50}
-                                            className="w-16 h-16 rounded-full mx-auto mb-2 object-cover"
-                                        />
-                                    ) : (
-                                        <Image
-                                            src={src}
-                                            alt={testimonial.name}
-                                            height={50}
-                                            width={50}
-                                            className="w-16 h-16 rounded-full mx-auto mb-2"
-                                        />
-                                    );
-                                })()}
-                                <hr/>
-                                <h3 className="font-bold text-center">{testimonial.name}</h3>
-                                <TestimonialContent html={testimonial.comment ?? ""} />
-                                <hr/>
-                                <div className="w-full flex justify-center">
-                                    {testimonial.relation && (
-                                        <p className="text-xs rounded-2xl p-2 bg-amber-200 w-fit
-                                     text-gray-500 text-center mt-1">
-                                            Relation: {testimonial.relation}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+        <section className={styles.testimonialsSection}>
+            <div className="flex min-h-[50vh] w-full flex-col items-center justify-center gap-8 bg-light-background p-8 dark:bg-dark-background">
+                <div className="w-full max-w-[69rem] px-4">
+                    <TestimonialsSectionHeader />
+                    <TestimonialsCtaLink />
                 </div>
-            ))}
-            {error && <div className="text-red-500 text-center">{error}</div>}
-        </div>
-        </div>
+
+                <div className="flex w-full max-w-[69rem] items-center justify-center gap-4 px-4">
+                    {testimonials.length === 0 ? (
+                        <div className="rounded-[30px] border-2 border-transparent bg-white p-8 text-center text-gray-500 dark:border-dark-nav-border dark:bg-dark-element dark:text-gray-300">
+                            No testimonials yet. Be the first to share your experience.
+                        </div>
+                    ) : (
+                        <>
+                            <button
+                                type="button"
+                                onClick={goPrev}
+                                aria-label="Previous testimonial"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-gray-400 transition hover:ring-4 hover:ring-gray-200 focus:outline-none dark:bg-dark-element dark:ring-dark-nav-border dark:hover:ring-gray-600"
+                            >
+                                <ChevronLeft className="h-5 w-5 text-gray-700 dark:text-gray-200" />
+                            </button>
+
+                            <div className={styles.testimonialCardWrap}>
+                                <TestimonyCard
+                                    testimonial={testimonials[activeIndex]}
+                                    getImageSrc={getImageSrc}
+                                    isDataUrl={isDataUrl}
+                                />
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={goNext}
+                                aria-label="Next testimonial"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-gray-400 transition hover:ring-4 hover:ring-gray-200 focus:outline-none dark:bg-dark-element dark:ring-dark-nav-border dark:hover:ring-gray-600"
+                            >
+                                <ChevronRight className="h-5 w-5 text-gray-700 dark:text-gray-200" />
+                            </button>
+                        </>
+                    )}
+                </div>
+            </div>
+
+            {error && <div className="mt-4 text-center text-red-500">{error}</div>}
+        </section>
     );
 };
 

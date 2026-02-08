@@ -8,7 +8,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     try {
         await connect();
         const body = await request.json();
-        const { name, relation, comment, whereWeFirstMet, professionalRelation, image } = body;
+        const { name, relation, comment, whereWeFirstMet, professionalRelation, company, position, image } = body;
 
         const testimonyService = ServiceFactory.getTestimonyService();
         await testimonyService.createTestimony({
@@ -17,6 +17,8 @@ export async function POST(request: Request): Promise<NextResponse> {
             comment,
             whereWeFirstMet,
             professionalRelation,
+            company: company != null && typeof company === "string" ? company.trim() : undefined,
+            position: position != null && typeof position === "string" ? position.trim() : undefined,
             image: image ?? undefined,
         });
 
