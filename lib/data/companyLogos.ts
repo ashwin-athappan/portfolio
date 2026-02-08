@@ -15,7 +15,7 @@ import tesla from "@/public/assets/svg/company/tesla.svg";
 import isn from "@/public/assets/svg/company/isn.png";
 import university_of_texas_at_arlington from "@/public/assets/svg/company/university_of_texas_at_arlington.svg";
 import hughes_systique_corporation from "@/public/assets/svg/company/hughes_systique_corporation.png";
-import hoc from "@/public/assets/svg/company/hoc.png";
+import hoc from "@/public/assets/svg/company/HOC.png";
 import accenture from "@/public/assets/svg/company/accenture.svg";
 import capgemini from "@/public/assets/svg/company/capgemini.svg";
 
