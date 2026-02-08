@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import styles from "./Testimonials.module.css";
 import { useTestimonials } from "@/lib/hooks/useTestimonials";
-import { mockTestimonials } from "@/lib/data/testimonials";
 import blank_user_black from "@/public/assets/svg/user_black.svg";
 import { Testimony } from "@/lib/types/Testimony";
 import type { ImageSrc } from "./TestimonyCard";
@@ -31,17 +30,8 @@ function isDataUrl(src: ImageSrc): src is string {
 }
 
 const Testimonials = (): React.JSX.Element => {
-    const { testimonials: fetchedTestimonials, error } = useTestimonials();
+    const { testimonials, error } = useTestimonials();
     const [activeIndex, setActiveIndex] = useState(0);
-
-    const testimonials: Testimony[] =
-        fetchedTestimonials.length > 0
-            ? fetchedTestimonials
-            : mockTestimonials.map((t) => ({
-                  ...t,
-                  imageUrl: t.imageUrl || blank_user_black,
-              }));
-
     const N = testimonials.length;
 
     const goPrev = () => {

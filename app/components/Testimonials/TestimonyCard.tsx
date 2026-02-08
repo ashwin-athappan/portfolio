@@ -48,7 +48,7 @@ export function TestimonyCard({ testimonial, getImageSrc, isDataUrl }: Testimony
 
     return (
         <article
-            className={`flex h-[320px] w-[480px] shrink-0 flex-col rounded-[30px] px-8 py-6 ${s.card}`}
+            className={`flex h-[25em] w-[40em] shrink-0 flex-col rounded-[30px] px-8 py-6 ${s.card}`}
         >
             <div className="mb-5 flex">
                 <div className="mr-5 shrink-0">
