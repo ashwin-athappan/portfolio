@@ -104,6 +104,14 @@ export default function TestimonialPage() {
                     onSubmit={handleSubmit}
                     encType="multipart/form-data"
                 >
+                    {error && (
+                        <div
+                            role="alert"
+                            className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400"
+                        >
+                            {error}
+                        </div>
+                    )}
                     {/* 1. Where did we first meet? */}
                     <div className="mb-5">
                         <label htmlFor="whereWeFirstMet" className={labelClass}>
@@ -281,10 +289,6 @@ export default function TestimonialPage() {
                             onChange={handleFileChange}
                         />
                     </div>
-
-                    {error && (
-                        <p className="mb-4 text-sm text-red-500">{error}</p>
-                    )}
 
                     <div className="flex items-center justify-between">
                         <button
