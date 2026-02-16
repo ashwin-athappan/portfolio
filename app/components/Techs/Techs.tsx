@@ -54,7 +54,7 @@ const Techs = () => {
 
     return (
         <div
-            className="md:row-span-2 col-span-1 glass-card relative h-[576px] overflow-hidden flex transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+            className="col-span-1 row-span-2 sm:row-span-1 md:row-span-2 glass-card relative h-[576px] sm:h-[400px] md:h-[576px] overflow-hidden flex transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
             <div className="grid gap-4 grid-cols-3 rotate-[35deg] absolute bottom-20 -right-20">
                 {techs.map((tech, index) => (
                     <div key={index} className="contents">

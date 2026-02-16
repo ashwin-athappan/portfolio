@@ -20,7 +20,7 @@ const ContactMe = (): React.JSX.Element => {
 
     return (
         <div
-            className="relative col-span-2 glass-card rounded-[28px] p-4 md:px-12 pb-5 overflow-hidden transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+            className="relative col-span-1 lg:col-span-2 glass-card rounded-[28px] p-4 md:px-12 pb-5 overflow-hidden transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
 
             {/* Header */}
             <h3 className="font-bold text-[20px] lg:text-[25px] dark:text-white">

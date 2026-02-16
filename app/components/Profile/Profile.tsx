@@ -31,7 +31,7 @@ const Profile = () => {
 
     return (
         <div
-            className={`${styles.profileCard} ${gridCols} hero-gradient p-6 flex flex-col md:gap-4 min-h-[280px] transition-shadow hover:shadow-[0_16px_48px_rgba(37,99,235,0.3)]`}>
+            className={`${styles.profileCard} ${gridCols} hero-gradient p-4 sm:p-6 flex flex-col md:gap-4 min-h-[280px] transition-shadow hover:shadow-[0_16px_48px_rgba(37,99,235,0.3)]`}>
             <div className="flex justify-between">
                 <div className={`${styles.imageContainer} relative w-20 h-20 lg:w-25 lg:h-25 shrink-0 rounded-2xl overflow-hidden`}>
                     <Image

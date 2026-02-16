@@ -54,9 +54,12 @@ const Header = (): React.JSX.Element => {
 
     return (
         <nav className="bg-transparent backdrop-filter backdrop-blur-sm fixed w-full z-40 top-0">
-            <div className="max-w-screen-xl flex justify-between items-center mx-auto p-4">
-                <h2 className="font-bold text-sky-800 text-[25px] lg:text-[20px]">
-                    <Link className="text-4xl" href="/">Ashwin</Link>
+            <div className="max-w-screen-xl flex justify-between items-center mx-auto p-3 sm:p-4">
+                <h2 className="font-bold text-sky-800 text-xl sm:text-[25px] lg:text-[20px]">
+                    <Link className="text-2xl sm:text-4xl" href="/">
+                        <span className="sm:hidden">A</span>
+                        <span className="hidden sm:inline">Ashwin</span>
+                    </Link>
                 </h2>
                 <div className="items-center bg-nav justify-between flex w-auto" id="navbar-sticky">
                     <div
@@ -68,7 +71,7 @@ const Header = (): React.JSX.Element => {
                             className="bg-light-highlight dark:bg-dark-highlight absolute transition-all duration-150 ease-out"
                         ></div>
                         {menuItems.map((item, index) => {
-                            let classes = "flex items-center nav-item cursor-pointer text-[#000000] dark:text-[#FFFFFF] transition ease-in duration-300 px-3 h-[32px] rounded-full relative z-10";
+                            let classes = "flex items-center nav-item cursor-pointer text-[#000000] dark:text-[#FFFFFF] transition ease-in duration-300 px-2 sm:px-3 text-sm sm:text-base h-[28px] sm:h-[32px] rounded-full relative z-10";
                             if (item.name === activeMenu) {
                                 classes += " nav-highlight";
                             }

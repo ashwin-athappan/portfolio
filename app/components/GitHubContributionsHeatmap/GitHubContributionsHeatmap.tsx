@@ -51,7 +51,7 @@ export default function GitHubContributionsHeatmap(): React.JSX.Element {
     if (error) {
         return (
             <div
-                className="md:row-span-1 col-span-3 md:col-span-3 glass-card rounded-[28px] p-4 h-[280px] flex flex-col justify-center items-center transition-shadow"
+                className="md:row-span-1 col-span-1 sm:col-span-2 lg:col-span-3 glass-card rounded-[28px] p-4 h-[280px] flex flex-col justify-center items-center transition-shadow"
                 aria-label="GitHub contributions"
             >
                 <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
@@ -72,7 +72,7 @@ export default function GitHubContributionsHeatmap(): React.JSX.Element {
     if (!weeks || weeks.length === 0) {
         return (
             <div
-                className="md:row-span-1 col-span-3 md:col-span-3 glass-card rounded-[28px] p-4 h-[280px] flex flex-col justify-center items-center transition-shadow"
+                className="md:row-span-1 col-span-1 sm:col-span-2 lg:col-span-3 glass-card rounded-[28px] p-4 h-[280px] flex flex-col justify-center items-center transition-shadow"
                 aria-label="GitHub contributions"
             >
                 <div className="w-full h-8 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-4" />
@@ -123,7 +123,7 @@ export default function GitHubContributionsHeatmap(): React.JSX.Element {
 
     return (
         <div
-            className="md:row-span-1 col-span-3 md:col-span-3 glass-card rounded-[28px] p-4 h-[280px] flex flex-col transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+            className="md:row-span-1 col-span-1 sm:col-span-2 lg:col-span-3 glass-card rounded-[28px] p-4 h-[280px] flex flex-col transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
             aria-label="GitHub contributions in the last year"
         >
             <div className="flex items-center justify-between mb-2 shrink-0">

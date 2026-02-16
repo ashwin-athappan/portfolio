@@ -15,7 +15,7 @@ export default function About() {
     return (
         <div className="home-canvas">
             {/* Dynamic grid: varied card sizes, visionOS-style layout */}
-            <div className="container mt-6 mx-auto grid grid-cols-2 lg:grid-cols-4 gap-5 p-4 px-6 xl:px-24 pb-16 content max-w-7xl">
+            <div className="container mt-6 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 p-4 px-4 sm:px-6 xl:px-24 pb-16 content max-w-7xl">
                 <Techs />
                 <GitHub />
                 <LinkedIn />
@@ -25,7 +25,7 @@ export default function About() {
                 <Profile />
                 <ContactMe />
             </div>
-            <div className="container mx-auto p-4 px-6 xl:px-24 pb-20 content max-w-7xl">
+            <div className="container mx-auto w-full min-w-0 overflow-x-hidden p-4 px-4 sm:px-6 xl:px-24 pb-20 content max-w-7xl">
                 <Testimonials />
             </div>
         </div>

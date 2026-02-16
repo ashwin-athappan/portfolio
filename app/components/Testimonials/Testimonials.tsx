@@ -46,15 +46,15 @@ const Testimonials = (): React.JSX.Element => {
 
     return (
         <section className={styles.testimonialsSection}>
-            <div className="flex min-h-[50vh] w-full flex-col items-center justify-center gap-8 p-8">
-                <div className="w-full max-w-[69rem] px-4">
+            <div className="flex min-h-[50vh] w-full flex-col items-center justify-center gap-6 sm:gap-8 p-4 sm:p-8">
+                <div className="w-full max-w-[69rem] min-w-0 px-2 sm:px-4">
                     <TestimonialsSectionHeader />
                     <TestimonialsCtaLink />
                 </div>
 
-                <div className="flex w-full max-w-[69rem] items-center justify-center gap-4 px-4">
+                <div className="flex w-full max-w-[69rem] min-w-0 items-center justify-center gap-2 sm:gap-4 px-2 sm:px-4">
                     {testimonials.length === 0 ? (
-                        <div className="glass-card rounded-[28px] p-8 text-center text-gray-600 dark:text-gray-300">
+                        <div className="glass-card w-full min-w-0 max-w-[40em] rounded-[28px] p-6 sm:p-8 text-center text-gray-600 dark:text-gray-300 text-sm sm:text-base">
                             No testimonials yet. Be the first to share your experience.
                         </div>
                     ) : (
