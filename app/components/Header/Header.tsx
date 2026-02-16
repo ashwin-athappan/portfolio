@@ -15,6 +15,7 @@ interface menuItemProps {
 const menuItemsInitial: menuItemProps[] = [
     { name: "About", link: "/" },
     { name: "Tools", link: "/tools" },
+    { name: "Certifications", link: "/certifications" },
     { name: "Projects", link: "/projects" },
     { name: "Resume", link: "/resume" },
 ];
