@@ -98,7 +98,6 @@ export default function GitHubContributionsHeatmap(): React.JSX.Element {
     const rowHeight = cellWithGap;
     const monthRowHeight = cellSize + 3;
     const gridWidth = cols * cellSize + (cols - 1) * gap;
-    const gridHeight = rows * cellSize + (rows - 1) * gap;
     const dayLabelPaddingTop = monthRowHeight + monthRowMarginBottom;
 
     const monthLabels: { month: string; weekIndex: number }[] = [];
