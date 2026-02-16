@@ -46,7 +46,7 @@ const Testimonials = (): React.JSX.Element => {
 
     return (
         <section className={styles.testimonialsSection}>
-            <div className="flex min-h-[50vh] w-full flex-col items-center justify-center gap-8 bg-light-background p-8 dark:bg-dark-background">
+            <div className="flex min-h-[50vh] w-full flex-col items-center justify-center gap-8 p-8">
                 <div className="w-full max-w-[69rem] px-4">
                     <TestimonialsSectionHeader />
                     <TestimonialsCtaLink />
@@ -54,7 +54,7 @@ const Testimonials = (): React.JSX.Element => {
 
                 <div className="flex w-full max-w-[69rem] items-center justify-center gap-4 px-4">
                     {testimonials.length === 0 ? (
-                        <div className="rounded-[30px] border-2 border-transparent bg-white p-8 text-center text-gray-500 dark:border-dark-nav-border dark:bg-dark-element dark:text-gray-300">
+                        <div className="glass-card rounded-[28px] p-8 text-center text-gray-600 dark:text-gray-300">
                             No testimonials yet. Be the first to share your experience.
                         </div>
                     ) : (
@@ -63,7 +63,7 @@ const Testimonials = (): React.JSX.Element => {
                                 type="button"
                                 onClick={goPrev}
                                 aria-label="Previous testimonial"
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-gray-400 transition hover:ring-4 hover:ring-gray-200 focus:outline-none dark:bg-dark-element dark:ring-dark-nav-border dark:hover:ring-gray-600"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full glass-card ring-1 ring-gray-300/50 transition hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] focus:outline-none dark:ring-white/10 dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)]"
                             >
                                 <ChevronLeft className="h-5 w-5 text-gray-700 dark:text-gray-200" />
                             </button>
@@ -80,7 +80,7 @@ const Testimonials = (): React.JSX.Element => {
                                 type="button"
                                 onClick={goNext}
                                 aria-label="Next testimonial"
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-gray-400 transition hover:ring-4 hover:ring-gray-200 focus:outline-none dark:bg-dark-element dark:ring-dark-nav-border dark:hover:ring-gray-600"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full glass-card ring-1 ring-gray-300/50 transition hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] focus:outline-none dark:ring-white/10 dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)]"
                             >
                                 <ChevronRight className="h-5 w-5 text-gray-700 dark:text-gray-200" />
                             </button>

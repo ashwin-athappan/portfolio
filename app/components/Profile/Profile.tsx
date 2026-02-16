@@ -31,9 +31,9 @@ const Profile = () => {
 
     return (
         <div
-            className={`${styles.profileCard} ${gridCols} bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border rounded-[30px] p-6 flex flex-col md:gap-4 h-[280px] hover:shadow-lg dark:hover:shadow-xl`}>
+            className={`${styles.profileCard} ${gridCols} hero-gradient p-6 flex flex-col md:gap-4 min-h-[280px] transition-shadow hover:shadow-[0_16px_48px_rgba(37,99,235,0.3)]`}>
             <div className="flex justify-between">
-                <div className={`${styles.imageContainer} relative w-20 h-20 lg:w-25 lg:h-25`}>
+                <div className={`${styles.imageContainer} relative w-20 h-20 lg:w-25 lg:h-25 shrink-0 rounded-2xl overflow-hidden`}>
                     <Image
                         className={`${styles.defaultImage} w-full h-full object-cover`}
                         src={coding}
@@ -42,17 +42,17 @@ const Profile = () => {
                         height={80}
                     />
                 </div>
-                <p className="w-[80%] font-medium text-gray-500 dark:text-gray-300 text-md text-justify">
-                    I’m <span className="text-lg">Ashwin</span>, an enthusiastic Software Developer from Arlington,
-                    Texas. I’m passionate about crafting impactful solutions using <span className="font-semibold">React.js, Spring Boot, Node.js and Next.js</span>,
-                    with expertise in <span className="font-semibold">AWS, Docker, Kubernetes, and Git</span>.
+                <p className="w-[80%] font-medium text-white/95 text-md text-justify drop-shadow-sm">
+                    I’m <span className="text-lg font-bold text-white">Ashwin</span>, an enthusiastic Software Developer from Arlington,
+                    Texas. I’m passionate about crafting impactful solutions using <span className="font-semibold text-white">React.js, Spring Boot, Node.js and Next.js</span>,
+                    with expertise in <span className="font-semibold text-white">AWS, Docker, Kubernetes, and Git</span>.
                 </p>
             </div>
             <div className="relative inline-block">
-                <p className="font-medium text-gray-500 dark:text-gray-300 text-md text-justify">
+                <p className="font-medium text-white/90 text-md text-justify drop-shadow-sm">
                     My expertise also includes database management, performance testing with JMeter, and software
                     development
-                    workflows using Git, Maven, and JIRA. I am proficient in <span className="font-semibold">Python, Java, JavaScript, and TypeScript</span>.
+                    workflows using Git, Maven, and JIRA. I am proficient in <span className="font-semibold text-white">Python, Java, JavaScript, and TypeScript</span>.
                 </p>
             </div>
         </div>

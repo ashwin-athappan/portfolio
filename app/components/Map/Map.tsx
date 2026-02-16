@@ -40,9 +40,8 @@ const Map = () => {
     };
 
     return (
-        <div className="md:row-span-1 col-span-1 md:col-span-1 bg-white border-2 border-transparent
-            dark:bg-dark-element dark:border-2 dark:border-dark-nav-border p-1
-            rounded-[30px] relative h-[280px] justify-center overflow-hidden flex hover:shadow-lg dark:hover:shadow-xl">
+        <div className="md:row-span-1 col-span-1 md:col-span-1 glass-card p-1
+            relative h-[280px] justify-center overflow-hidden flex transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
             <div className="">
                 {mapUrl && (
                     <iframe
