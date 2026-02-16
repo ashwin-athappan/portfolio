@@ -20,15 +20,15 @@ const ContactMe = (): React.JSX.Element => {
 
     return (
         <div
-            className="relative col-span-2 rounded-[30px] p-4 md:px-12 pb-20 bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border shadow-lg overflow-hidden">
+            className="relative col-span-1 lg:col-span-2 glass-card rounded-[28px] p-4 md:px-12 pb-5 overflow-hidden transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
 
             {/* Header */}
-            <h2 className="font-bold text-[25px] lg:text-[30px] dark:text-white">
+            <h3 className="font-bold text-[20px] lg:text-[25px] dark:text-white">
                 Get In Touch:
-            </h2>
+            </h3>
 
             {/* Contact Info */}
-            <p className="mt-4 text-gray-500 flex items-center dark:text-white">
+            <p className="mt-2 text-gray-500 flex items-center dark:text-white">
                 <span className="mr-2">Email me:</span>
                 <span>{email}</span>
 
@@ -41,7 +41,7 @@ const ContactMe = (): React.JSX.Element => {
                 </button>
             </p>
 
-            <form className="mt-5 mx-auto"
+            <form className="mt-2 mx-auto"
                   onSubmit={handleSubmit}>
                 <div className="mb-2">
                     <label htmlFor="email" className="sr-only">How do I reach you?</label>
@@ -55,25 +55,28 @@ const ContactMe = (): React.JSX.Element => {
                         placeholder="What is your email?"
                     />
                 </div>
-                <div className="mb-2">
-                    <label htmlFor="message" className="sr-only">What do you want to say?</label>
-                    {errors.message && (<span className="text-red-500">{errors.message}</span>)}
-                    <input
-                        id="message"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        className={inputClass}
-                        placeholder="What do you want to say?"
-                    />
-                </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-items-start w-full">
+
+                    <div className="w-[85%]">
+                        <label htmlFor="message" className="sr-only">What do you want to say?</label>
+                        {errors.message && (<span className="text-red-500">{errors.message}</span>)}
+                        <textarea
+                            id="message"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            className={inputClass}
+                            placeholder="What do you want to say?"
+                        />
+                    </div>
+
                     <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                         py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                         ml-2 py-5 px-4 rounded-2xl focus:outline-none focus:shadow-outline"
                         type="submit"
                     >
                         Send
                     </button>
+
                 </div>
             </form>
         </div>

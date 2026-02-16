@@ -20,6 +20,18 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Optional: GitHub contributions heatmap
+
+The home page shows a **GitHub contributions heatmap** (last year of activity) in a glass card.
+
+**Setup:** Add a GitHub personal access token to `.env.local`:
+
+1. Go to [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens).
+2. Generate a new token (classic). No scopes are required for public contribution data.
+3. Set in `.env.local`: `GITHUB_TOKEN=ghp_...`
+
+If `GITHUB_TOKEN` is not set, the card shows a short message and a link to your GitHub profile instead of the heatmap.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

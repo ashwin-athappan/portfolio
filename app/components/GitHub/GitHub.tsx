@@ -29,9 +29,8 @@ const GitHub = () => {
     }, [theme]);
 
     return (
-        <div className="md:row-span-1 col-span-1 md:col-span-1 bg-white border-2 border-transparent
-            dark:bg-dark-element dark:border-2 dark:border-dark-nav-border
-            rounded-[30px] relative h-[280px] justify-center overflow-hidden flex hover:shadow-lg dark:hover:shadow-xl">
+        <div className="md:row-span-1 col-span-1 md:col-span-1 glass-card
+            relative h-[280px] justify-center overflow-hidden flex transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
             <Image src={githubImage} alt="GitHub" width={200} height={200} className="p-10 h-auto w-auto"/>
             <LinkArrow link={githubUrl} mounted={mounted} theme={theme} linkType={"external"}/>
         </div>

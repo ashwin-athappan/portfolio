@@ -37,7 +37,7 @@ const ThemeSwitch = () => {
     };
 
     return (
-        <div className="inline-block">
+        <div className="inline-block origin-right scale-75 sm:scale-100">
             <input
                 id="Switch"
                 type="checkbox"

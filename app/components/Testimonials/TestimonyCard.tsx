@@ -30,9 +30,9 @@ function getHeadline(comment: string, professionalRelation?: string): string {
     return text.slice(0, 80) + (text.length > 80 ? "…" : "");
 }
 
-/** Card style matching Profile, GitHub, etc.: white / dark-element, gray text */
+/** Card style: glassmorphic visionOS-style */
 const cardStyle = {
-    card: "bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border rounded-[30px] shadow-lg dark:shadow-xl",
+    card: "glass-card rounded-[28px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.35)]",
     name: "text-gray-700 dark:text-gray-200",
     designation: "text-gray-500 dark:text-gray-400",
     heading: "text-gray-800 dark:text-gray-100",
@@ -47,7 +47,7 @@ export function TestimonyCard({ testimonial, getImageSrc, isDataUrl }: Testimony
 
     return (
         <article
-            className={`flex h-[25em] w-[40em] shrink-0 flex-col rounded-[30px] px-8 py-6 ${s.card}`}
+            className={`flex w-full min-w-0 max-w-[40em] min-h-[32em] sm:min-h-0 sm:h-[25em] sm:w-[40em] shrink-0 flex-col rounded-[28px] px-4 py-5 sm:px-8 sm:py-6 ${s.card}`}
         >
             <div className="mb-5 flex">
                 <div className="mr-5 shrink-0">
