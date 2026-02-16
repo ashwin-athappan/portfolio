@@ -6,6 +6,7 @@ import Techs from "@/app/components/Techs/Techs";
 import GitHub from "@/app/components/GitHub/GitHub";
 import LinkedIn from "@/app/components/LinkedIn/LinkedIn";
 import YouTube from "@/app/components/YouTube/YouTube";
+import DevTo from "@/app/components/DevTo/DevTo";
 import ContactMe from "@/app/components/ContactMe/ContactMe";
 import GitHubContributionsHeatmap from "@/app/components/GitHubContributionsHeatmap/GitHubContributionsHeatmap";
 import React from "react";
@@ -20,9 +21,10 @@ export default function About() {
                 <GitHub />
                 <LinkedIn />
                 <YouTube />
+                <Profile />
+                <DevTo />
                 <GitHubContributionsHeatmap />
                 <Map />
-                <Profile />
                 <ContactMe />
             </div>
             <div className="container mx-auto w-full min-w-0 overflow-x-hidden p-4 px-4 sm:px-6 xl:px-24 pb-20 content max-w-7xl">

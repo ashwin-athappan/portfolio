@@ -18,6 +18,17 @@ import hughes_systique_corporation from "@/public/assets/svg/company/hughes_syst
 import hoc from "@/public/assets/svg/company/HOC.png";
 import accenture from "@/public/assets/svg/company/accenture.svg";
 import capgemini from "@/public/assets/svg/company/capgemini.svg";
+import xbox from "@/public/assets/svg/company/xbox.svg";
+import amd from "@/public/assets/svg/company/amd.svg";
+import nvidia from "@/public/assets/svg/company/nvidia.svg";
+import qualcomm from "@/public/assets/svg/company/qualcomm.svg";
+import bosch from "@/public/assets/svg/company/bosch.svg";
+import costco from "@/public/assets/svg/company/costco.svg";
+import homedepot from "@/public/assets/svg/company/homedepot.svg";
+import honewell from "@/public/assets/svg/company/honeywell.svg";
+import samsung from "@/public/assets/svg/company/samsung.png";
+import target from "@/public/assets/svg/company/target.svg";
+import intel from "@/public/assets/svg/company/intel.svg";
 
 /**
  * Map company name (as in COMPANY_NAMES) → StaticImageData for logos in public/assets/svg/company.
@@ -42,4 +53,16 @@ export const companyLogos: Record<string, StaticImageData> = {
     HOC: hoc,
     capgemini: capgemini,
     accenture: accenture,
+    XBOX: xbox,
+    AMD: amd,
+    Nvidia: nvidia,
+    Qualcomm: qualcomm,
+    Intel: intel,
+    Bosch: bosch,
+    Costco: costco,
+    "Home Depot": homedepot,
+    Honeywell: honewell,
+    Samsung: samsung,
+    Target: target,
+
 };
