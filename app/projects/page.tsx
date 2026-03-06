@@ -23,7 +23,7 @@ const Projects = () => {
             {projects.map((project, index) => (
                 <div
                     key={index}
-                    className="row-span-2 md:row-span-1 col-span-2 bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border rounded-[30px] p-6 flex flex-col gap-4 h-[400px] md:h-[310px] hover:shadow-lg dark:hover:shadow-xl hover-trigger relative"
+                    className="row-span-2 md:row-span-1 col-span-2 bg-white dark:bg-dark-element dark:border-2 dark:border-dark-nav-border rounded-[30px] p-6 flex flex-col gap-4 h-[450px] md:h-[350px] hover:shadow-lg dark:hover:shadow-xl hover-trigger relative"
                 >
                     <div className="grid grid-cols-4 sm:mb-4">
                         {/* Image */}

@@ -5,6 +5,7 @@ import eOrganDonor from "@/public/assets/projects/EOrganDonor.png";
 import twoPCImage from "@/public/assets/projects/2pc.png";
 import regressionAnalysis from "@/public/assets/projects/regression_analysis.jpg";
 import dailyCode from "@/public/assets/projects/daily_code.png";
+import sqlExecutionVisualizer from "@/public/assets/projects/SQLExecutionVisualizer.png";
 
 import react from "@/public/assets/svg/frameworks/reactjs.svg";
 import nextjs from "@/public/assets/svg/frameworks/nextjs2.svg";
@@ -145,6 +146,23 @@ const projects: Project[] = [
             {name: "Bash", image: bash},
             {name: "PostgresSQL", image: postgres},
             {name: "prisma", image: prisma},
+        ],
+    },
+    {
+        name: "SQL Execution Visualizer",
+        description:
+            "This project is an interactive web application that simulates a mini-database system, allowing users to write SQL queries and visualize their execution.",
+        image: sqlExecutionVisualizer,
+        github: "https://github.com/ashwin-athappan/sql-execution-visualizer",
+        demo: "https://sql-execution-visualizer.vercel.app/",
+        status: true,
+        date: "April - 2024",
+        type: ProjectType.Personal,
+        tech: [
+            {name: "TypeScript", image: typescript},
+            {name: "NextJS", image: nextjs},
+            {name: "Tailwind", image: tailwind},
+            {name: "React", image: react}
         ],
     },
 ];
