@@ -1,6 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/next';
 
 import {NextThemeProvider} from "./providers/NextThemeProvider";
 import {cookies} from "next/headers";
@@ -33,6 +34,7 @@ export default async function RootLayout({
                 <Footer/>
             </div>
         </NextThemeProvider>
+        <Analytics />
         </body>
         </html>
     );
