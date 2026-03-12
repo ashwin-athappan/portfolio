@@ -65,16 +65,22 @@ export default function Resume(): React.JSX.Element {
             duration: 'Jan 2022 – Jul 2024',
             startDate: new Date('2022-01-01'),
             details: [
-                'Led the migration of legacy systems to event-driven microservices using <em><b>Spring Boot</b></em> and <em><b>Google Pub/Sub (GCP)</b></em>, significantly increasing system uptime and scalability.',
-                'Collaborated with cross-functional teams to implement ’hard lock’ and ’soft lock’ account security mechanisms and engineered PCI data masking for raw credit card storage.',
-                'Converted <b>100+</b> older SOAP endpoints into lightweight <em><b>RESTful APIs</b></em>, reducing network traffic and data size by <b>30%</b>.',
-                'Built E2E automated deployment pipelines using <em><b>Docker</b></em>, <em><b>Kubernetes (GKE)</b></em>, and <em><b>Google Cloud Build</b></em>, which cut deployment time by <b>50%</b> and removed manual errors.',
-                'Improved database stability by setting up <em><b>Liquibase</b></em> for automated updates and writing database procedures, reducing deployment failures by <b>15%</b>.'
+                '<b><em>Decoupled VoIP work order processing from monolithic billing system</em></b>, improving system uptime and reducing deployment cycles, by <b><em>architecting a Spring Boot microservice</em></b> with REST APIs, Oracle stored procedure integration, Avro-based DTOs, and GCP Pub/Sub for event-driven communication.',
+                '<b><em>Resolved critical database connection leakage</em></b> that caused production outages, restoring 100% database uptime, by diagnosing unreleased connections in a Node.js microservice and <b><em>implementing a Singleton pattern</em></b> for connection management.',
+                '<b><em>Automated archival of 100+ GB of on-prem</em></b> server logs, reducing manual storage management and ensuring long-term log retention, by <b><em>developing Python scripts</em></b> to compress and upload logs to Google Cloud Archive Storage.',
+                '<b><em>Streamlined CI/CD pipelines</em></b> using Docker, Kubernetes, and Google Cloud Build, resulting in a <b><em>50% reduction in deployment lead time</em></b> and zero-downtime releases via Blue-Green deployments.',
+                '<b><em>Automated database schema migrations</em></b> by integrating <b><em>Liquibase</em></b>, reducing manual DB deployment effort from 2 days to just a few minutes and eliminating version drift across environments.',
             ]
         },
     ];
 
     const projects: Project[] = [
+        {
+            name: 'Event Management System',
+            startDate: new Date('2021-05-01'),
+            technologies: 'Next.js, Node.js, Postgres, PrismaORM, JIRA, Agile, Docker, Kubernetes',
+            details: 'Achieved 100% on-time feature delivery, as tracked in JIRA sprint metrics, by leading a 4-person Agile team to develop a full-stack event platform.'
+        },
         {
             name: 'University Center Asset Management Dashboard',
             startDate: new Date('2025-07-09'),
@@ -85,7 +91,7 @@ export default function Resume(): React.JSX.Element {
             name: 'Algo Visualizer',
             startDate: new Date('2021-05-01'),
             technologies: 'Java, Spring Boot, Bash, Maven',
-            details: 'I built an algorithm visualizer in my college as an inspirational project. It showcases sorting (Bubble, Insertion, Selection, Merge, Quick Sort), scheduling (FCFS, SJF, Priority, Round Robin), graph traversal (DFS, BFS, Dijkstra’s, Prim’s MST), N Queens, searching (Linear, Binary), BST operations, and stack/queue operations. It features step-by-step animations, speed control, and input customization for enhanced learning. This website was deployed on GitHub pages using GitHub Actions.',
+            details: 'Built an interactive algorithm visualizer, implementing algorithms across multiple data structures (arrays, linked lists, graphs) to explore time complexity and algorithm behavior through animated demonstrations.',
             link: 'https://ashwin-athappan.github.io/algo-visualizer-deploy/'
         },
         {
@@ -100,19 +106,6 @@ export default function Resume(): React.JSX.Element {
             startDate: new Date('2025-05-01'),
             technologies: 'Next.js, Tailwind CSS, MongoDB',
             details: 'Developed a responsive e-commerce website using Next.js and Tailwind CSS, integrating MongoDB for efficient data storage and retrieval. Implemented features such as user authentication, product search, shopping cart functionality, and order processing, ensuring optimal performance and a seamless user experience. Focused on clean, reusable code and leveraging Next.js for enhanced SEO and dynamic routing.'
-        },
-        {
-            name: 'Event Management System',
-            startDate: new Date('2021-05-01'),
-            technologies: 'Next.js, Node.js, Postgres, PrismaORM, JIRA, Agile, Docker, Kubernetes',
-            details: 'Worked collaboratively with a Team of 3 to build an event-management-system. Organized JIRA dashboard to assist development and organized daily SCRUM calls'
-        },
-        {
-            name: 'eOrganDonor',
-            startDate: new Date('2021-01-01'),
-            technologies: 'Django, Python, HTML, CSS',
-            details: 'Developed a web application using Django to facilitate organ donation and transplantation. Implemented features such as user registration, organ donation requests, donor matching, and donor-recipient communication. Ensured data security and privacy by integrating user authentication, authorization, and encryption protocols. Dockerized the application for scalability.',
-            link: 'https://github.com/ashwin-athappan/e_Organ_Donor-Django'
         }
     ];
 
@@ -121,33 +114,33 @@ export default function Resume(): React.JSX.Element {
 
     const skills = [
         {
-            name: 'Programming',
-            skills: ['HTML', 'CSS', 'Java', 'Python', 'JavaScript', 'TypeScript', 'SQL', 'C#', 'Bash']
+            name: 'Languages',
+            skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C#', 'HTML5/CSS3']
         },
         {
             name: 'Frameworks',
-            skills: ['Spring Boot', 'React.js', 'Node.js', 'Next.js', 'Django', 'Tailwind CSS'],
+            skills: ['Spring Boot', 'Node.js', 'React JS', 'Next JS', 'Django', 'Flask'],
+        },
+        {
+            name: 'Cloud/DevOps',
+            skills: ['GCP', 'Docker', 'Kubernetes', 'Jenkins', 'Git', 'Liquibase', 'JUnit']
         },
         {
             name: 'Databases',
-            skills: ['MongoDB', 'MySQL', 'Oracle DB', 'Postgres', 'Liquibase']
+            skills: ['MySQL', 'MongoDB', 'Oracle 10g', 'Prisma ORM']
         },
         {
-            name: 'Cloud & DevOps',
-            skills: ['Git', 'JIRA', 'GCP', 'AWS', 'Docker', 'Kubernetes', 'Linux']
-        },
-        {
-            name: 'ML/AI',
-            skills: ['Scikit-learn', 'Matplotlib', 'Seaborn', 'Pandas', 'NumPy', 'PyTorch', 'Neural Networks']
+            name: 'Methodologies',
+            skills: ['Agile/Scrum', 'Microservices', 'Event-Driven Architecture', 'CI/CD', 'OOP']
         }
     ];
 
     return (
         <div className="min-h-screen bg-light-background dark:bg-dark-background py-12 px-4">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-5xl mx-auto">
                 {/* Header */}
                 <header className="text-center mb-12">
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Ashwin Athappan</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Ashwin Athappan Karuppan Chetty</h1>
                     <p className="text-lg text-gray-600 dark:text-gray-300 mt-1">Software Engineer</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
                         <Link href="mailto:ashwinathappank@gmail.com" className="text-dark-blue hover:underline">ashwinathappank@gmail.com</Link> | Arlington, TX
@@ -237,7 +230,7 @@ export default function Resume(): React.JSX.Element {
 
             </div>
             <div className="flex justify-center">
-                <Link href={'https://drive.google.com/file/d/1_CJJVMYZVwvBqvr-71nypVlekPJo-NZk/view?usp=sharing'}
+                <Link href={'https://drive.google.com/file/d/1bQs5_a2qtv1j6ZvU6DFYbebF8I2vd8gR/view?usp=sharing'}
                       target={'_blank'}
                       className="text-dark-element dark:text-white rounded-2xl bg-[#6CB4EE] dark:bg-[#00308F] px-6 py-2 transition-all duration-700 ease-in-out">
                     Download

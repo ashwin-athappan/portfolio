@@ -65,7 +65,7 @@ const WorkExperienceTimeLineComponent: React.FC<TimelineProps> = ({
                                             {event.details.map((paragraph, idx) => (
                                                 <li
                                                     key={idx}
-                                                    className="mb-3 last:mb-0 max-w-[450px]"
+                                                    className="mb-3 last:mb-0 max-w-2xl text-justify"
                                                     dangerouslySetInnerHTML={{ __html: paragraph }}
                                                 />
                                             ))
